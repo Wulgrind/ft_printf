@@ -3,28 +3,25 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		d;
-	char	c,	*s;
 	int		ret;
+	int		i;
+	char	*str;
 
 	ret = 0;
+	i = 0;
 	va_start(ap, format);
-	if (*format)
-		switch (*format)
-		{
-			case 's' :	/* chaine */
-				s = va_arg (ap, char *);
-				ft_putstr(s, &ret);
-				break;
-			case 'd' :	/* int */
-				d = va_arg (ap, int);
-				ft_putnbr(d, &ret);
-				break;
-			case 'c' :	/* character */
-				c = (char) va_arg (ap, int);
-				ft_putchar(c, &ret);
-				break;
-		}
+	str = ft_stdrup(format);
+	while (str[i++])
+	{
+			if (str[i] == '%')
+			{
+				va_arg (ap, char *);
+
+				ft_flags(ap, &ret, str);
+			}
+			else
+				ft_putstr(str[i], &ret);
+	}
 	va_end(ap);
 	return (ret);
 }

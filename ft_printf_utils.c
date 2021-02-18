@@ -1,5 +1,30 @@
 #include "ft_printf.h"
 
+char	*stdrup(char	*src)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	len = 0;
+	while (src[len])
+		len++;
+	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
+	   return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = src[i];
+		i++;
+	}
+	return (str);
+}
+
+void	ft_flags(va_list ap, int *ret, char *str)
+{
+	
+}
+
 void	ft_putchar(char c, int *ret)
 {
 	write (1, &c, 1);
