@@ -9,8 +9,8 @@ int	ft_printf(const char *format, ...)
 
 	ret = 0;
 	va_start(ap, format);
-	while (*format)
-		switch (*format++)
+	if (*format)
+		switch (*format)
 		{
 			case 's' :	/* chaine */
 				s = va_arg (ap, char *);
@@ -27,4 +27,9 @@ int	ft_printf(const char *format, ...)
 		}
 	va_end(ap);
 	return (ret);
+}
+
+int	main()
+{
+	
 }
