@@ -6,6 +6,7 @@ int	ft_printf(const char *format, ...)
 	int		ret;
 	int		i;
 	char	*str;
+	s_flag	a;
 
 	ret = 0;
 	i = 0;
@@ -15,9 +16,9 @@ int	ft_printf(const char *format, ...)
 	{
 			if (str[i] == '%')
 			{
-				va_arg (ap, char *);
+				va_arg(ap, type);
 
-				ft_flags(ap, &ret, str);
+				ft_flags(ap, &ret, str, &a);
 			}
 			else
 				ft_putstr(str[i], &ret);

@@ -20,7 +20,7 @@ char	*stdrup(char	*src)
 	return (str);
 }
 
-void	ft_flags(va_list ap, int *ret, char *str)
+int		ft_flags(va_list ap, int *ret, char *str, s_flag *a)
 {
 	
 }
