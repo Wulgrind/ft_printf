@@ -22,7 +22,23 @@ char	*stdrup(char	*src)
 
 int		ft_flags(va_list ap, int *ret, char *str, s_flag *a)
 {
-	
+	int	i;
+
+	i = 0;
+	while (str[i] != '%' && str[i])
+	{
+		i++;
+	}
+	while (str[i++])
+	{
+		if (str[i] == '0')
+			s_flag->zero = 1;
+		if (str[i] == '-')
+			s_flag->minus = 1;
+		if (!ft_isdigit(str[i]) && str[i -1] != 'm' && str[i -1] != '.')
+
+	}
+	return (1);
 }
 
 void	ft_putchar(char c, int *ret)
