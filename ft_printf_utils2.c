@@ -7,43 +7,32 @@ int	ft_isdigit(char c)
 	return (1);
 }
 
-int ft_width(char *str)
+int ft_width(char *str, static int *i)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (str[i] != '%' && str[i])
-		i++;
-	while (ft_isdigit(str[i]))
-		i++;
-	while (!ft_isdigit(str[i++]))
+	while (!ft_isdigit(str[(*i)++]))
 	{
 		j = j * 10;
-		j += str[i] - '0';
+		j += str[*i] - '0';
 	}
 	return (j);
 }
 
-int	ft_star(char *str, va_list ap)
+int	ft_star(char *str, va_list ap, static int i)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (str[i] != '%' && str[i])
-		i++;
-	while (str[i] != '*' && str[i])
-		i++;
-	i++;
-	if (str[i] == 'm')
-		i++;
-	if (ft_isdigit(str[i]))
+	(*i)++;
+	if (str[*i] == 'm')
+		(*i)++;
+	if (ft_isdigit(str[*i]))
 		j = ft_nextarg(str, ap);
 	if (!ft_isdigit(str[i]))
-		j = ft_narg(str, ap);
+		j = ft_narg(str, ap, i);
+	return (j);
 }
 
 int	ft_nextarg(char *str, va_list ap)
@@ -58,14 +47,26 @@ int	ft_nextarg(char *str, va_list ap)
 	return (i);
 }
 
-int	ft_narg(char *str, va_list ap)
+int	ft_narg(char *str, va_list ap, static int i)
 {
 	va_list	ap2;
-	int		i;
 	int		j;
+	int		r;
 
-	i = 0;
 	j = 0;
+	r = 0;
 	va_copy(ap2, ap);
-
+	while (!ft_isdigit(str[(*i)++]) && str[*i])
+	{
+		j = j * 10;
+		j += (str[i] - '0');
+	}
+	while (j != 1)
+	{
+		va_arg(ap2, type);
+		j--;
+	}
+	r = va_arg(ap2, int);
+	va_end(ap2);
+	return (r);
 }

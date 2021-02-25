@@ -20,28 +20,22 @@ char	*stdrup(char	*src)
 	return (str);
 }
 
-int		ft_flags(va_list ap, int *ret, char *str, s_flag *a)
+int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '%' && str[i])
+	while (str[(*i)++])
 	{
-		i++;
-	}
-	while (str[i++])
-	{
-		if (str[i] == '0')
+		if (str[*i] == 'm' && str[*i -1] == '*')
+			(*i)++;
+		if (str[*i] == '0')
 			a->zero = 1;
-		if (str[i] == '-')
+		if (str[*i] == '-')
 			a->minus = 1;
-		if (!ft_isdigit(str[i]) && a->width == 0)
-			a->width = ft_width(str);
-		if (str[i] == '*')
-			if (str[i +1] == 'm')
-				i++;
-			a->width = ft_star(str, ap);
-
+		if (!ft_isdigit(str[*i]) && a->width == 0)
+			a->width = ft_width(str, i);
+		if (str[*i] == '*')
+			a->width = ft_star(str, ap, i);
+		if (str[*i] == '.')
+			a->dot = ft_dot(str, ap);
 	}
 	return (1);
 }
