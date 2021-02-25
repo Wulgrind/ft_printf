@@ -36,7 +36,9 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a)
 		if (str[i] == '-')
 			a->minus = 1;
 		if (!ft_isdigit(str[i]) && str[i -1] != 'm')
-			ft_width(str);
+			a->width = ft_width(str);
+		if (str[i] == '*')
+			a->width = ft_star(str, ap);
 
 	}
 	return (1);
