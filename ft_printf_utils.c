@@ -24,7 +24,7 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 {
 	while (str[(*i)++])
 	{
-		if (str[*i] == 'm' && str[*i -1] == '*')
+		if (str[*i] == 'm')
 			(*i)++;
 		if (str[*i] == '0')
 			a->zero = 1;
@@ -35,7 +35,14 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 		if (str[*i] == '*')
 			a->width = ft_star(str, ap, i);
 		if (str[*i] == '.')
-			a->dot = ft_dot(str, ap);
+			a->dot = ft_dot(str, ap, i);
+		if (a->minus == 1)
+			a->zero = 0;
+		if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
+				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
+				|| str[*i] == '%')
+			ft_type(ap, ret, str, a, i);
+		return (1);
 	}
 	return (1);
 }
@@ -67,14 +74,25 @@ void	ft_putnbr(int d, int *ret)
 	}
 }
 
-void	ft_putstr(char *s, int *ret)
+void	ft_putstr(char *s, int *ret, s_flag *a)
 {
-	int	i;
+	int	width;
+	int	dot;
+	int	j;
 	
-	i = 0;
-	while (s[i] != '\0')
+	width = 0;
+	dot = 0;
+	j = ft_strlen(s);
+	k = 0;
+	if (a->dot > 0)
 	{
-		ft_putchar(s[i], ret);
-		i++;
+		dot = a->dot;
 	}
+	if (a->width > 0)
+	{
+		width = a->width;
+		while (j > width)
+			width++;
+	}
+	ft_writestr(s, ret, a, width, dot, j)
 }

@@ -17,7 +17,6 @@ int	ft_printf(const char *format, ...)
 			if (str[i] == '%')
 			{
 				va_arg(ap, type);
-
 				ft_flags(ap, &ret, str, &a, &i);
 			}
 			else
