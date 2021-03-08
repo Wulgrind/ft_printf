@@ -78,12 +78,11 @@ void	ft_putstr(char *s, int *ret, s_flag *a)
 {
 	int	width;
 	int	dot;
-	int	j;
+	int	len;
 	
 	width = 0;
 	dot = 0;
-	j = ft_strlen(s);
-	k = 0;
+	len = ft_strlen(s);
 	if (a->dot > 0)
 	{
 		dot = a->dot;
