@@ -16,9 +16,11 @@ int		ft_dot(char *str, va_list ap, static int *i)
 void	ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 {
 	if (str[*i] == 'c')
-		ft_printfC(va_list ap, int ret, char str, s_flag a);
+		ft_printfC(ap, ret, str, a);
 	if (str[*i] == 's')
-		ft_printfS(va_list ap, int ret, char str, s_flag a);
+		ft_printfS(ap, ret, str, a);
+	if (str[*i] == 'p')
+		ft_printfP(ap, ret, str, a);
 	
 }
 

@@ -29,6 +29,7 @@ void			ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i);
 void			ft_printfC(va_list ap, int *ret, char *str, s_flag *a);
 void			ft_printfS(va_list ap, int *ret, char *str, s_flag *a);
 void			ft_writestr(char *s, int *ret, s_flag *a, int width, int dot, int len);
+void			ft_printfP(va_list ap, int *ret, char *str, s_flag *a);
 
 
 #endif
