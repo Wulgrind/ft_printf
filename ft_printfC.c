@@ -1,11 +1,9 @@
 #include "ft_printf.h"
 
-void	ft_printfC(va_list ap, int *ret, char *str, s_flag *a)
+void	ft_printfC(va_list ap, int *ret, s_flag *a)
 {
 	int	c;
-	va_list ap2;
 
-	c = (char) va_copy(ap2, ap);
+	c = (char) va_arg(ap, int);
 	ft_putchar(c, ret);
-	va_end(ap2);
 }

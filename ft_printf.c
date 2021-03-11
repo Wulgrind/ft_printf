@@ -16,7 +16,7 @@ int	ft_printf(const char *format, ...)
 	{
 			if (str[i] == '%')
 			{
-				va_arg(ap, type);
+				ft_initflags(&a);
 				ft_flags(ap, &ret, str, &a, &i);
 			}
 			else
@@ -29,5 +29,5 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	
+	ft_printf("Salut");
 }

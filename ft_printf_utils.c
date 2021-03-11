@@ -25,7 +25,7 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 	while (str[(*i)++])
 	{
 		if (str[*i] == 'm')
-			(*i)++;
+			continue;
 		if (str[*i] == '0')
 			a->zero = 1;
 		if (str[*i] == '-')

@@ -10,7 +10,6 @@ typedef struct	s_flag
 	int		zero;
 	int		dot;
 	int		minus;
-	char	type;
 	int		star;
 	int		width;
 }				s_flag;
@@ -26,10 +25,14 @@ int				ft_star(char *str, va_list ap);
 int				ft_nextarg(char *str, va_list ap);
 int				ft_dot(char *str, va_list ap, static int i);
 void			ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i);
-void			ft_printfC(va_list ap, int *ret, char *str, s_flag *a);
-void			ft_printfS(va_list ap, int *ret, char *str, s_flag *a);
+void			ft_printfC(va_list ap, int *ret, s_flag *a);
+void			ft_printfS(va_list ap, int *ret, s_flag *a);
 void			ft_writestr(char *s, int *ret, s_flag *a, int width, int dot, int len);
-void			ft_printfP(va_list ap, int *ret, char *str, s_flag *a);
+void			ft_printfP(va_list ap, int *ret, s_flag *a);
+void			ft_printfD(va_list ap, int *ret, s_flag *a);
+void			ft_initflags(s_flag *a);
+void			ft_printfU(va_list ap, int *ret, s_flag *a);
+void			ft_printfX(va_list ap, int *ret, s_flag *a, int *c);
 
 
 #endif
