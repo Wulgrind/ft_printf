@@ -33,7 +33,7 @@ void	ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 			x = 1;
 		if (str[*i] == 'X')
 			x = 2;
-		ft_printfX(ap, ret, a, &x);
+		ft_printfX(ap, ret, a, x);
 	}
 }
 

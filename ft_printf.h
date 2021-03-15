@@ -32,7 +32,7 @@ void			ft_printfP(va_list ap, int *ret, s_flag *a);
 void			ft_printfD(va_list ap, int *ret, s_flag *a);
 void			ft_initflags(s_flag *a);
 void			ft_printfU(va_list ap, int *ret, s_flag *a);
-void			ft_printfX(va_list ap, int *ret, s_flag *a, int *c);
+void			ft_printfX(va_list ap, int *ret, s_flag *a, int c);
 
 
 #endif
