@@ -62,34 +62,69 @@ int		ft_strlen(char *s)
 	return (i);
 }
 
-void	ft_writestr(char *s, int *ret, s_flag *a, int width, int dot, int len)
+void	ft_writestr(char *s, int *ret, s_flag *a, int len)
 {
 	int	i;
 
 	i = 0;
-	if (dot > -1)
+	if (a->dot > -1)
 	{
+		if (a->minus == 0)
+		{
+			while (i <= len && i <= a->width && i <= a->dot)
+			{
+				ft_putchar(s[i], ret);
+				i++;
+			}
+			while (i <= a->width && i <= a->dot)
+			{
+				ft_putchar(' ', ret);
+				i++;
+			}
+		}
 		if (a->minus > 0)
 		{
-			while (i++ <= len && i <= width && i <= dot)
-				ft_putchar(s[i], ret);
-			while (i++ <= width && i <= dot)
+			while (a->width > len && a->dot > 0)
+			{
 				ft_putchar(' ', ret);
-		}
-		else
-		{
-			while (width-- > len && width > dot)
-				ft_putchar(' ', ret);
-			while (i++ < len && i < width && i < dot)
+				a->width--;
+				a->dot--;
+			}
+			while (i <= len && a->dot > 0)
+			{
 				ft_putchar(s[i], ret);
+				i++;
+				a->dot--;
+			}
 		}
 	}
-	if (dot == -1)
+	if (a->dot == -1)
+	{
+		if (a->minus == 0)
+		{
+			while (i <= len && i <= a->width)
+			{
+				ft_putchar(s[i], ret);
+				i++;
+			}
+			while (i <= a->width)
+			{
+			ft_putchar(' ', ret);
+			}
+		}
 		if (a->minus > 0)
 		{
-			while (i++ <= len && i <= width)
+			while (a->width > len)
+			{
+				ft_putchar(' ', ret);
+				a->width--;
+				a->dot--;
+			}
+			while (i <= len)
+			{
 				ft_putchar(s[i], ret);
-			while (i++ < len && i < width)
-				ft_putchar(s[i], ret);
+				i++;
+			}
 		}
+	}
 }

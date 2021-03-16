@@ -35,8 +35,7 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	char	c;
-
-	c = 'a';
-	ft_printf("Ca cva %c", c);
+	char	str[] = "Salutations";
+	char	a = 'e';
+	ft_printf("Bonjour %s", str);
 }

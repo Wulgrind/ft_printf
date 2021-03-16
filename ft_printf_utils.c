@@ -22,7 +22,7 @@ char	*ft_stdrup(const char *src)
 
 int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 {
-	while (str[i])
+	while (str[(*i)++])
 	{
 		if (str[*i] == 'm')
 			continue;
@@ -47,7 +47,6 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 		}
 		else
 			return (1);
-		(*i)++;
 	}
 	return (1);
 }
@@ -81,22 +80,13 @@ void	ft_putnbr(int d, int *ret)
 
 void	ft_putstr(char *s, int *ret, s_flag *a)
 {
-	int	width;
-	int	dot;
 	int	len;
-	
-	width = 0;
-	dot = 0;
+
 	len = ft_strlen(s);
-	if (a->dot > 0)
-	{
-		dot = a->dot;
-	}
 	if (a->width > 0)
 	{
-		width = a->width;
-		while (len > width)
-			width++;
+		while (len > a->width)
+			a->width++;
 	}
-	ft_writestr(s, ret, a, width, dot, len);
+	ft_writestr(s, ret, a, len);
 }
