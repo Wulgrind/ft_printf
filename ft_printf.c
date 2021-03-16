@@ -12,6 +12,11 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	va_start(ap, format);
 	str = ft_stdrup(format);
+	if(!(ft_check(str)))
+	{
+		ft_putstr("No %, wrong format", &ret, &a);
+		return (0);
+	}
 	while (str[i++])
 	{
 			if (str[i] == '%')

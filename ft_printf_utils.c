@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-char	*stdrup(char	*src)
+char	*ft_stdrup(const char *src)
 {
 	int		i;
 	int		len;
@@ -20,29 +20,33 @@ char	*stdrup(char	*src)
 	return (str);
 }
 
-int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, static int *i)
+int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 {
 	while (str[(*i)++])
 	{
 		if (str[*i] == 'm')
 			continue;
-		if (str[*i] == '0')
+		else if (str[*i] == '0')
 			a->zero = 1;
-		if (str[*i] == '-')
+		else if (str[*i] == '-')
 			a->minus = 1;
-		if (!ft_isdigit(str[*i]) && a->width == 0)
+		else if (!ft_isdigit(str[*i]) && a->width == 0)
 			a->width = ft_width(str, i);
-		if (str[*i] == '*')
-			a->width = ft_star(str, ap, i);
-		if (str[*i] == '.')
+		else if (str[*i] == '*')
+			a->width = ft_star(str, ap);
+		else if (str[*i] == '.')
 			a->dot = ft_dot(str, ap, i);
-		if (a->minus == 1)
+		else if (a->minus == 1)
 			a->zero = 0;
-		if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
+		else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
 				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
 				|| str[*i] == '%')
+		{
 			ft_type(ap, ret, str, a, i);
-		return (1);
+			return (1);
+		}
+		else
+			return (1);
 	}
 	return (1);
 }
@@ -90,8 +94,8 @@ void	ft_putstr(char *s, int *ret, s_flag *a)
 	if (a->width > 0)
 	{
 		width = a->width;
-		while (j > width)
+		while (len > width)
 			width++;
 	}
-	ft_writestr(s, ret, a, width, dot, j)
+	ft_writestr(s, ret, a, width, dot, len);
 }

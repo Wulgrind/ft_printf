@@ -1,6 +1,19 @@
 #include "ft_printf.h"
 
-int		ft_dot(char *str, va_list ap, static int *i)
+int		ft_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i++])
+	{
+		if (str[i] == '%')
+			return (1);
+	}
+	return (0);
+}
+
+int		ft_dot(char *str, va_list ap, int *i)
 {
 	int	j;
 
@@ -35,6 +48,8 @@ void	ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i)
 			x = 2;
 		ft_printfX(ap, ret, a, x);
 	}
+	if (str[*i] == '%')
+		ft_putchar('%', ret);
 }
 
 int		ft_strlen(char *s)
