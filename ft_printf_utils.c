@@ -22,7 +22,7 @@ char	*ft_stdrup(const char *src)
 
 int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 {
-	while (str[(*i)++])
+	while (str[i])
 	{
 		if (str[*i] == 'm')
 			continue;
@@ -33,9 +33,9 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 		else if (!ft_isdigit(str[*i]) && a->width == 0)
 			a->width = ft_width(str, i);
 		else if (str[*i] == '*')
-			a->width = ft_star(str, ap);
+			a->width = ft_star(str, ap, i);
 		else if (str[*i] == '.')
-			a->dot = ft_dot(str, ap, i);
+			a->dot = ft_dot(str, i);
 		else if (a->minus == 1)
 			a->zero = 0;
 		else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
@@ -47,6 +47,7 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 		}
 		else
 			return (1);
+		(*i)++;
 	}
 	return (1);
 }

@@ -1,18 +1,18 @@
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putdbl(unsigned double u, int *ret, s_flag *a);
-void	ft_len(unsigned double u);
-void	ft_writedbl(unsigned double u, int *ret);
+static void	ft_putdbl(unsigned int u, int *ret, s_flag *a);
+static int	ft_len(unsigned int u);
+static void	ft_writedbl(unsigned int u, int *ret);
 
 void	ft_printfU(va_list ap, int *ret, s_flag *a)
 {
-	unsigned double	u;
+	unsigned int	u;
 	
-	u = (unsigned double) va_arg(ap, unsigned int);
-	ft_putdbl(u, ret, a)
+	u = (unsigned int) va_arg(ap, unsigned int);
+	ft_putdbl(u, ret, a);
 }
 
-void	ft_putdbl(unsigned double u, int *ret, s_flag *a)
+static void	ft_putdbl(unsigned int u, int *ret, s_flag *a)
 {
 	int	i;
 	int	hole;
@@ -21,10 +21,10 @@ void	ft_putdbl(unsigned double u, int *ret, s_flag *a)
 	i = ft_len(u);
 	if (a->dot < 0)
 		a->dot = 1;
-	while (i < dot)
+	while (i < a->dot)
 		hole++;
 	while (i + hole > a->width)
-		width++;
+		a->width++;
 	while (i + hole < a->width)
 		hole++;
 	if (a->minus == 0 && a->zero == 0)
@@ -46,7 +46,7 @@ void	ft_putdbl(unsigned double u, int *ret, s_flag *a)
 	}
 }
 
-int		ft_len(unsigned double u)
+static int		ft_len(unsigned int u)
 {
 	int	len;
 	
@@ -59,9 +59,9 @@ int		ft_len(unsigned double u)
 	return (len);
 }
 
-void	ft_writedbl(unsigned double u, int *ret)
+static void	ft_writedbl(unsigned int u, int *ret)
 {
-	long unsigned double nb;
+	long unsigned int nb;
 
 	nb = u;
 	while (nb > 9)
@@ -69,6 +69,6 @@ void	ft_writedbl(unsigned double u, int *ret)
 		ft_writedbl(u / 10, ret);
 		ft_writedbl(u % 10, ret);
 	}
-	else
+	if (nb < 9)
 		ft_putchar(u + '0', ret);
 }

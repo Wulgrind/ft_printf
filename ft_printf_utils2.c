@@ -42,15 +42,3 @@ int	ft_nextarg(va_list ap)
 	va_end(ap2);
 	return (i);
 }
-
-int	ft_strlen(char *s)
-{
-	int	i;
-	
-	i = 0;
-	while (s[i])
-	{
-		i++;
-	}
-	return (i);
-}

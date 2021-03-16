@@ -1,17 +1,18 @@
 #include "ft_printf.h"
 
-int		ft_len(signed double d);
-void	ft_writedbl(signed double d, int *ret);
+int		ft_len(int d);
+int		ft_writedbl(int d, int *ret, int i);
+void	ft_putdbl(int d, int *ret, s_flag *a);
 
 void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 {
-	signed double	d;
+	int	d;
 
-	d = (signed double) va_arg(ap, int);
+	d = (int) va_arg(ap, int);
 	ft_putdbl(d, ret, a);
 }
 
-void	ft_putdbl(signed double d, int *ret, s_flag *a)
+void	ft_putdbl(int d, int *ret, s_flag *a)
 {
 	int					i;
 	int					hole;
@@ -20,15 +21,15 @@ void	ft_putdbl(signed double d, int *ret, s_flag *a)
 	i = ft_len(d);
 	if (a->dot < 0)
 		a->dot = 1;
-	while (i < dot)
+	while (i < a->dot)
 		hole++;
 	while (i + hole > a->width)
-		width++;
+		a->width++;
 	while (i + hole < a->width)
 		hole++;
 	if (a->minus == 0 && a->zero == 0)
 	{
-		ft_writedbl(d, ret);
+		ft_writedbl(d, ret, i);
 		while (hole-- > 0)
 			ft_putchar(' ', ret);
 	}
@@ -41,11 +42,11 @@ void	ft_putdbl(signed double d, int *ret, s_flag *a)
 			if (a->zero > 0)
 				ft_putchar('0', ret);
 		}
-		ft_writedbl(d, ret);
+		ft_writedbl(d, ret, i);
 	}
 }
 
-int		ft_len(signed double d)
+int		ft_len(int d)
 {
 	int	len;
 
@@ -63,23 +64,27 @@ int		ft_len(signed double d)
 	return (len);
 }
 
-void	ft_writedbl(signed double d, int *ret)
+int	ft_writedbl(int d, int *ret, int i)
 {
-	long signed double nb;
+	char	*str;
+	int		j;
 
-	nb = d;
-	if (nb < 0)
+	j = 0;
+	if (!(str = malloc(sizeof(i + 1))))
+		return (0);
+	str[i + 1] = '\0';
+	if (d < 0)
 	{
-		ft_putchar('-', ret);
-		nb = -nb;
+		str[0] = '-';
+		d = d * -1;
 	}
-	if (nb > 9)
+	while (d > 0)
 	{
-		ft_writedbl(nb / 10, ret);
-		ft_writedbl(nb % 10, ret);
+		str[i] = d % 10;
+		d = d / 10;
+		i--;
 	}
-	else
-	{
-		ft_putchar(nb + '0', ret);
-	}
+	while (str[j++])
+		ft_putchar(str[j], ret);
+	return (1);
 }

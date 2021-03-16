@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	ft_printfC(va_list ap, int *ret, s_flag *a)
+void	ft_printfC(va_list ap, int *ret)
 {
 	int	c;
 

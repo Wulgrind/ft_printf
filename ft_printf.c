@@ -17,7 +17,7 @@ int	ft_printf(const char *format, ...)
 		ft_putstr("No %, wrong format", &ret, &a);
 		return (0);
 	}
-	while (str[i++])
+	while (str[i])
 	{
 			if (str[i] == '%')
 			{
@@ -26,6 +26,7 @@ int	ft_printf(const char *format, ...)
 			}
 			else
 				ft_putchar(str[i], &ret);
+			i++;
 	}
 	va_end(ap);
 	i = 0;
@@ -34,5 +35,8 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf("Salut");
+	char	c;
+
+	c = 'a';
+	ft_printf("Ca cva %c", c);
 }

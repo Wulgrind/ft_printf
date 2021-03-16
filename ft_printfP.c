@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int		ft_len(unsigned long int x)
+int		ft_l(unsigned long int x)
 {
 		int				i;
 		unsigned int	j;
@@ -15,7 +15,7 @@ int		ft_len(unsigned long int x)
 		return (i);
 }
 
-void	ft_hexadecimal(char **s, unsigned long int x, s_flag a, int hole, int len)
+void	ft_hexadecimal(char **s, unsigned long int x, s_flag *a, int hole, int len)
 {
 	int	temp;
 
@@ -45,7 +45,7 @@ void	ft_hexadecimal(char **s, unsigned long int x, s_flag a, int hole, int len)
 	}
 }
 
-char	*ft_makestr(unsigned long int x, s_flag a, char *s, int hole, int len)
+char	*ft_createstr(unsigned long int x, s_flag *a, char *s, int hole, int len)
 {
 	int	i;
 
@@ -58,22 +58,22 @@ char	*ft_makestr(unsigned long int x, s_flag a, char *s, int hole, int len)
 		else
 			while (i < hole)
 				s[i++] = '0';
-		s[i++] = ft_putchar('0', ret);
-		s[i++] = ft_putchar('X', ret);
-		ft_decimal(*s, x, a, hole, len);
+		s[i++] = '0';
+		s[i++] = 'X';
+		ft_hexadecimal(&s, x, a, hole, len);
 	}
 	if (a->zero == 0 && a->minus == 0)
 	{
 		while (hole-- > 0)
 			s[len + hole] = ' ';
-		s[i++] = ft_putchar('0', ret);
-		s[i++] = ft_putchar('X', ret);
-		ft_hexadecimal(*s, x, a, hole, len);
+		s[i++] = '0';
+		s[i++] = 'X';
+		ft_hexadecimal(&s, x, a, hole, len);
 	}
 	return (s);
 }
 
-void	ft_printfP(va_list ap, int *ret, s_flag *a)
+int	ft_printfP(va_list ap, int *ret, s_flag *a)
 {
 	unsigned long int	*p;
 	char				*s;
@@ -85,20 +85,21 @@ void	ft_printfP(va_list ap, int *ret, s_flag *a)
 	p = (unsigned long int *) va_arg(ap, void *);
 	i = *p;
 	j = 0;
-	len = ft_len(i);
+	len = ft_l(i);
 	if (a->dot > len)
 		hole = a->dot - len;
-	if (width > 0)
+	if (a->width > 0)
 	{
-		while (width < hole + len)
-			width++;
+		while (a->width < hole + len)
+		a->width++;
 		while ((hole + len) < a->width)
 			hole++;
 	}
 	if (!(s = malloc(sizeof(hole + len + 3))))
 		return (0);
 	s[hole + len + 3] = '\0';
-	s = ft_makestr(i, a, s, hole, len);
+	s = ft_createstr(i, a, s, hole, len);
 	while (s[j++] != '\0')
 		ft_putchar(s[i], ret);
+	return (1);
 }

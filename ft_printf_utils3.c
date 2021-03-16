@@ -13,7 +13,7 @@ int		ft_check(char *str)
 	return (0);
 }
 
-int		ft_dot(char *str, va_list ap, int *i)
+int		ft_dot(char *str, int *i)
 {
 	int	j;
 
@@ -26,12 +26,12 @@ int		ft_dot(char *str, va_list ap, int *i)
 	return (j);
 }
 
-void	ft_type(va_list ap, int *ret, char *str, s_flag *a, static int *i)
+void	ft_type(va_list ap, int *ret, char *str, s_flag *a, int *i)
 {
 	int	x;
 
 	if (str[*i] == 'c')
-		ft_printfC(ap, ret, a);
+		ft_printfC(ap, ret);
 	if (str[*i] == 's')
 		ft_printfS(ap, ret, a);
 	if (str[*i] == 'p')
@@ -84,7 +84,7 @@ void	ft_writestr(char *s, int *ret, s_flag *a, int width, int dot, int len)
 				ft_putchar(s[i], ret);
 		}
 	}
-	if (dot = -1)
+	if (dot == -1)
 		if (a->minus > 0)
 		{
 			while (i++ <= len && i <= width)
