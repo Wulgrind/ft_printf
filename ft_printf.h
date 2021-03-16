@@ -28,7 +28,7 @@ int				ft_dot(char *str, int *i);
 void			ft_type(va_list ap, int *ret, char *str, s_flag *a, int *i);
 void			ft_printfC(va_list ap, int *ret);
 void			ft_printfS(va_list ap, int *ret, s_flag *a);
-void			ft_writestr(char *s, int *ret, s_flag *a, int width, int dot, int len);
+void			ft_writestr(char *s, int *ret, s_flag *a, int len);
 int				ft_printfP(va_list ap, int *ret, s_flag *a);
 void			ft_printfD(va_list ap, int *ret, s_flag *a);
 void			ft_initflags(s_flag *a);

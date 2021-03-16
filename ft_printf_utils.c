@@ -83,10 +83,7 @@ void	ft_putstr(char *s, int *ret, s_flag *a)
 	int	len;
 
 	len = ft_strlen(s);
-	if (a->width > 0)
-	{
 		while (len > a->width)
 			a->width++;
-	}
 	ft_writestr(s, ret, a, len);
 }
