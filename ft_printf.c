@@ -32,10 +32,3 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	return (ret);
 }
-
-int	main()
-{
-	char	str[] = "Salutations";
-	char	a = 'e';
-	ft_printf("Bonjour %s", str);
-}
