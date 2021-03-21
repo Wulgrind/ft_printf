@@ -1,7 +1,11 @@
 #include "ft_printf.h"
 
-void	ft_initflags(s_flag *a)
+void	ft_initflags(s_flag *a, va_list ap)
 {
+	if (a->star == 1)
+	{
+		va_arg(ap, int);
+	}
 	a->zero = 0;
 	a->minus = 0;
 	a->dot = -1;
