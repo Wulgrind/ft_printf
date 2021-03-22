@@ -9,6 +9,7 @@ void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 	int	d;
 
 	d = (int) va_arg(ap, int);
+	write(1, "bite", 4);
 	ft_putdbl(d, ret, a);
 }
 

@@ -36,8 +36,8 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	int	i = 55;
-	// ft_printf("test %d", i);
+	int	i = 555;
+	ft_printf("test %d", i);
 	write(1, "\n", i);
 	printf("test %5d", i);
 }
