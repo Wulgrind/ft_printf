@@ -9,7 +9,6 @@ void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 	int	d;
 
 	d = (int) va_arg(ap, int);
-	write(1, "bite", 4);
 	ft_putdbl(d, ret, a);
 }
 
@@ -17,16 +16,12 @@ int	ft_putdbl(int d, int *ret, s_flag *a)
 {
 	int		i;
 	int		j;
-	int		s;
 	char	*str;
 
 	i = ft_len(d);
 	j = i;
-	s = 0;
 	while (j < a->dot)
 		j++;
-	while (a->width < j)
-		a->width++;
 	while (j < a->width)
 		j++;
 	if (!(str = malloc(sizeof(j + 1))))
@@ -73,11 +68,11 @@ int	ft_writedbl(int d, int *ret, int i, int j, char *str, s_flag *a)
 		}
 		while (d > 0)
 		{
-			str[s] = d % 10;
+			str[s] = 48 + (d % 10);
 			d = d / 10;
 			s++;
 		}
-		while (s < 0)
+		while (s >= 0)
 		{
 			ft_putchar(str[s], ret);
 			s--;
@@ -92,7 +87,7 @@ int	ft_writedbl(int d, int *ret, int i, int j, char *str, s_flag *a)
 		}
 		while (d > 0)
 		{
-			str[s] = d % 10;
+			str[s] = 48 + (d % 10);
 			d = d / 10;
 			s++;
 		}
