@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
 int		ft_len(int d);
-int		ft_writedbl(int d, int *ret, int i);
-void	ft_putdbl(int d, int *ret, s_flag *a);
+int		ft_writedbl(int d, int *ret, int i, int j, char *str, s_flag *a);
+int	ft_putdbl(int d, int *ret, s_flag *a);
 
 void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 {
@@ -12,38 +12,27 @@ void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 	ft_putdbl(d, ret, a);
 }
 
-void	ft_putdbl(int d, int *ret, s_flag *a)
+int	ft_putdbl(int d, int *ret, s_flag *a)
 {
-	int					i;
-	int					hole;
+	int		i;
+	int		j;
+	int		s;
+	char	*str;
 
-	hole = 0;
 	i = ft_len(d);
-	if (a->dot < 0)
-		a->dot = 1;
-	while (i < a->dot)
-		hole++;
-	while (i + hole > a->width)
+	j = i;
+	s = 0;
+	while (j < a->dot)
+		j++;
+	while (a->width < j)
 		a->width++;
-	while (i + hole < a->width)
-		hole++;
-	if (a->minus == 0 && a->zero == 0)
-	{
-		ft_writedbl(d, ret, i);
-		while (hole-- > 0)
-			ft_putchar(' ', ret);
-	}
-	if (a->minus > 0 || a->zero > 0)
-	{
-		while (hole-- > 0)
-		{
-			if (a->minus > 0)
-				ft_putchar(' ', ret);
-			if (a->zero > 0)
-				ft_putchar('0', ret);
-		}
-		ft_writedbl(d, ret, i);
-	}
+	while (j < a->width)
+		j++;
+	if (!(str = malloc(sizeof(j + 1))))
+		return (0);
+	str[j + 1] = '\0';
+	ft_writedbl(d, ret, i , j, str, a);
+	return (1);
 }
 
 int		ft_len(int d)
@@ -64,27 +53,58 @@ int		ft_len(int d)
 	return (len);
 }
 
-int	ft_writedbl(int d, int *ret, int i)
+int	ft_writedbl(int d, int *ret, int i, int j, char *str, s_flag *a)
 {
-	char	*str;
-	int		j;
+	int	s;
 
-	j = 0;
-	if (!(str = malloc(sizeof(i + 1))))
-		return (0);
-	str[i + 1] = '\0';
-	if (d < 0)
+	s = 0;
+	if (a->zero == 0 && a->minus == 0)
 	{
-		str[0] = '-';
-		d = d * -1;
+		while (j > i)
+		{
+			ft_putchar('0', ret);
+			j--;
+		}
+		if (d < 0)
+		{
+			ft_putchar('-', ret);
+			d = d * -1;
+		}
+		while (d > 0)
+		{
+			str[s] = d % 10;
+			d = d / 10;
+			s++;
+		}
+		while (s < 0)
+		{
+			ft_putchar(str[s], ret);
+			s--;
+		}
 	}
-	while (d > 0)
+	else if (a->zero > 0 || a->minus > 0)
 	{
-		str[i] = d % 10;
-		d = d / 10;
-		i--;
+		if (d < 0)
+		{
+			ft_putchar ('-', ret);
+			d = d * -1;
+		}
+		while (d > 0)
+		{
+			str[s] = d % 10;
+			d = d / 10;
+			s++;
+		}
+		while (s < 0)
+		{
+			ft_putchar (str[s], ret);
+			s--;
+		}
+		while (j > i)
+		{
+			ft_putchar('0', ret);
+			j--;
+		}
 	}
-	while (str[j++])
-		ft_putchar(str[j], ret);
 	return (1);
 }
