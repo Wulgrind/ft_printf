@@ -15,7 +15,7 @@ static int		ft_len(unsigned int x)
 	return (i);
 }
 
-static int	ft_hexadecimal(unsigned int x, s_flag *a, int len, int c, int *ret)
+static int	ft_hexadecimal(unsigned int x,  int len, int c, int *ret)
 {
 	int		temp;
 	char	*s;
@@ -58,6 +58,24 @@ int	ft_printfX(va_list ap, int *ret, s_flag *a, int c)
 		hole++;
 	while (a->dot > (len + hole))
 		hole++;
-	ft_hexadecimal(x, a, len, c, ret);
+	if (a->minus == 0 && a->zero == 0)
+	{
+		while (hole > 0)
+		{
+			ft_putchar(' ', ret);
+		}
+	}
+	ft_hexadecimal(x,len, c, ret);
+	if (a->minus > 0 || a->zero > 0)
+	{
+		while (hole > 0)
+		{
+			if (a->minus > 0)
+				ft_putchar(' ', ret);
+			if (a->minus == 0 && a->zero > 0)
+				ft_putchar('0', ret);
+			hole--;
+		}
+	}
 	return (1);
 }

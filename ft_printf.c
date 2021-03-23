@@ -31,13 +31,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (ret);
 }
-
-#include <stdio.h>
-
-int	main()
-{
-	int	i = 16;
-	ft_printf("%x", i);
-	write(1, "\n", i);
-	printf("%x", i);
-}
