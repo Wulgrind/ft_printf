@@ -32,14 +32,3 @@ int	ft_printf(const char *format, ...)
 	free(str);
 	return (ret);
 }
-
-#include <stdio.h>
-
-int main()
-{
-	char c = 'a';
-	int i = 5;
-	
-	ft_printf("%*c", i, c);
-	printf("%*c", i, c);
-}
