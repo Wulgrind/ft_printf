@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	ft_initflags(s_flag *a, va_list ap)
+void	ft_initflags(s_flag *a)
 {
 	a->zero = 0;
 	a->minus = 0;

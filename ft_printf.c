@@ -21,7 +21,7 @@ int	ft_printf(const char *format, ...)
 	{
 			if (str[i] == '%')
 			{
-				ft_initflags(&a, ap);
+				ft_initflags(&a);
 				ft_flags(ap, &ret, str, &a, &i);
 			}
 			else
@@ -31,4 +31,16 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	free(str);
 	return (ret);
+}
+
+#include <stdio.h>
+
+int	main()
+{
+	char *str = "0";
+	char *deux = "2";
+
+	ft_printf("%s test %s", str, deux);
+	write(1, "\n", 1);
+	printf("%s test %s", str, deux);
 }
