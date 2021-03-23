@@ -32,7 +32,7 @@ void	ft_type(va_list ap, int *ret, char *str, s_flag *a, int *i)
 	int	x;
 
 	if (str[*i] == 'c')
-		ft_printfC(ap, ret);
+		ft_printfC(ap, ret, a);
 	if (str[*i] == 's')
 		ft_printfS(ap, ret, a);
 	if (str[*i] == 'p')

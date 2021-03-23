@@ -25,21 +25,17 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 {
 	while (str[(*i)++])
 	{
-		if (str[*i] == 'm')
-			continue;
-		else if (str[*i] == '0')
+		 if (str[*i] == '0')
 			a->zero = 1;
-		else if (str[*i] == '-')
+		 else if (str[*i] == '-')
 			a->minus = 1;
-		else if (!ft_isdigit(str[*i]) && a->width == 0)
+		 else if (!ft_isdigit(str[*i]) && a->width == 0)
 			a->width = ft_width(str, i);
-		else if (str[*i] == '*')
+		 else if (str[*i] == '*')
 			a->width = ft_star(str, ap, i);
-		else if (str[*i] == '.')
+		 else if (str[*i] == '.')
 			a->dot = ft_dot(str, i);
-		else if (a->minus == 1)
-			a->zero = 0;
-		else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
+		 else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
 				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
 				|| str[*i] == '%')
 		{
