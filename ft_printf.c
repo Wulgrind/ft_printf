@@ -32,15 +32,3 @@ int	ft_printf(const char *format, ...)
 	free(str);
 	return (ret);
 }
-
-#include <stdio.h>
-
-int	main()
-{
-	char *str = "0";
-	char *deux = "2";
-
-	ft_printf("%s test %s", str, deux);
-	write(1, "\n", 1);
-	printf("%s test %s", str, deux);
-}

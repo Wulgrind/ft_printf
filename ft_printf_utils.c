@@ -75,12 +75,14 @@ void	ft_putnbr(int d, int *ret)
 	}
 }
 
-void	ft_putstr(char *s, int *ret, s_flag *a)
+void	ft_putstr(char *str, int *ret)
 {
-	int	len;
+	int	i;
 
-	len = ft_strlen(s);
-		while (len > a->width)
-			a->width++;
-	ft_writestr(s, ret, a, len);
+	i = 0;
+	while (str[i])
+	{
+		ft_putchar(str[i], ret);
+		i++;
+	}
 }
