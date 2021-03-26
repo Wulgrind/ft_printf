@@ -14,9 +14,9 @@ static void	ft_treatminus(int *ret, s_flag *a, int len)
 {
 	if (a->minus > 0 || a->zero > 0)
 	{
-		if (a->dot > 0)
+		if (a->dot > -1)
 		{
-			while (len < a->width && len < a->dot)
+			while (len < a->width)
 			{
 				if (a->minus > 0)
 					ft_putchar(' ', ret);
@@ -25,7 +25,7 @@ static void	ft_treatminus(int *ret, s_flag *a, int len)
 				len++;
 			}
 		}
-		if (a->dot < 0)
+		if (a->dot == -1)
 		{
 			while (len < a->width)
 			{
@@ -45,26 +45,32 @@ void	ft_printfS(va_list ap, int *ret, s_flag *a)
 	int		len;
 
 	len = 0;
-	if (a->dot > 0)
-		while (len > a->dot)
-			len--;
 	str = (char *) va_arg(ap, char *);
 	len = ft_len(str);
+	if (a->dot > -1)
+		while (len > a->dot)
+			len--;
 	if (a->minus == 0 && a->zero == 0)
 	{
-		if (a->dot > 0)
-			while (len < a->width && len < a->dot)
+		if (a->dot > -1)
+			while (len < a->width)
 			{
 				ft_putchar(' ', ret);
 				len++;
 			}
-		if (a->dot < 0)
+		if (a->dot ==  -1)
 			while(len < a->width)
 			{
 				ft_putchar(' ',ret);
 				len++;
 			}
 	}
-	ft_putstr(str, ret);
+	if (a->dot > -1)
+		while(len > a->dot)
+			len--;
+	if (a->dot == -1)
+		ft_putstr(str, ret);
+	if (a->dot > -1)
+		ft_putstrlen(str, ret, len);
 	ft_treatminus(ret, a, len);
 }

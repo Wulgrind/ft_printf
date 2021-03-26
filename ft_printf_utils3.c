@@ -14,7 +14,7 @@ int		ft_check(char *str)
 	return (0);
 }
 
-int		ft_dot(char *str, int *i)
+int		ft_dot(char *str, int *i, va_list ap, s_flag *a)
 {
 	int	j;
 
@@ -22,8 +22,10 @@ int		ft_dot(char *str, int *i)
 	(*i)++;
 	if (!ft_isdigit(str[*i]))
 		j = ft_width(str, i);
-	if (str[*i] == '.')
-	j = 0;   
+	else if (str[*i] == '*')
+		j = ft_nextarg(ap, a);
+	else 
+		(*i)--;
 	return (j);
 }
 
@@ -61,4 +63,16 @@ int		ft_strlen(char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+void	ft_putstrlen(char *str, int *ret, int len)
+{
+	int	i;
+
+	i = 0;
+	while(str[i] && i < len)
+	{
+		ft_putchar(str[i], ret);
+		i++;
+	}
 }
