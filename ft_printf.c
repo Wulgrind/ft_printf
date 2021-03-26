@@ -32,3 +32,12 @@ int	ft_printf(const char *format, ...)
 	free(str);
 	return (ret);
 }
+
+#include <stdio.h>
+
+int	main()
+{
+	ft_printf(" %i ", 0);
+	write(1, "\n", 1);
+	printf(" %i ", 0);
+}
