@@ -16,10 +16,10 @@ static void ft_fill(s_flag *a, int len, int *ret)
 {
 	while (len < a->width)
 	{
-		if (a->minus > 0)
-			ft_putchar(' ', ret);
-		if (a->minus == 0)
+		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
 			ft_putchar('0', ret);
+		else
+			ft_putchar(' ', ret);
 		len++;
 	}
 }
@@ -28,6 +28,8 @@ int	ft_putdbl(int d, int *ret, s_flag *a)
 {
 	int		len;
 
+	if (a->dot >= 0)
+		a->zero = 0;
 	if (d < 0)
 	{
 		ft_putchar('-', ret);
