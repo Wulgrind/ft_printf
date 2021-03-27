@@ -35,9 +35,9 @@ int	ft_printf(const char *format, ...)
 
 #include <stdio.h>
 
-int	main()
+/*int	main()
 {
-	ft_printf(" %i ", 0);
+	ft_printf(" %-3.2i %10.42i", 10, -10);
 	write(1, "\n", 1);
-	printf(" %i ", 0);
-}
+	printf(" %-3.2i %10.42i", 10, -10);
+} */

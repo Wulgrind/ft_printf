@@ -12,22 +12,39 @@ void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 	ft_putdbl(d, ret, a);
 }
 
+static void ft_fill(s_flag *a, int len, int *ret)
+{
+	while (len < a->width)
+	{
+		if (a->minus > 0)
+			ft_putchar(' ', ret);
+		if (a->minus == 0)
+			ft_putchar('0', ret);
+		len++;
+	}
+}
+
 int	ft_putdbl(int d, int *ret, s_flag *a)
 {
-	int		i;
-	int		j;
-	char	*str;
+	int		len;
 
-	i = ft_len(d);
-	j = i;
-	while (j < a->dot)
-		j++;
-	while (j < a->width)
-		j++;
-	if (!(str = malloc(sizeof(j + 1))))
-		return (0);
-	str[j + 1] = '\0';
-	ft_writedbl(d, ret, i , j, str, a);
+	if (d < 0)
+	{
+		ft_putchar('-', ret);
+		d = d * -1;
+	}
+	len = ft_len(d);
+	while (len < a->dot)
+	{
+		ft_putchar('0', ret);
+		len++;
+	}
+	if (a->minus == 0 && a->zero == 0)
+		ft_fill(a, len, ret);
+	if (!(d == 0 && a->dot >= 0))
+		ft_putnbr(d, ret, a);
+	if (a->minus > 0 || a->zero > 0)
+		ft_fill(a, len, ret);
 	return (1);
 }
 
@@ -44,63 +61,7 @@ int		ft_len(int d)
 	while (d > 0)
 	{
 		d = d / 10;
-		len ++;
+		len++;
 	}
 	return (len);
-}
-
-int	ft_writedbl(int d, int *ret, int i, int j, char *str, s_flag *a)
-{
-	int	s;
-
-	s = 0;
-	if (a->zero == 0 && a->minus == 0)
-	{
-		while (j > i)
-		{
-			ft_putchar('0', ret);
-			j--;
-		}
-		if (d < 0)
-		{
-			ft_putchar('-', ret);
-			d = d * -1;
-		}
-		while (d > 0)
-		{
-			str[s] = 48 + (d % 10);
-			d = d / 10;
-			s++;
-		}
-		while (s >= 0)
-		{
-			ft_putchar(str[s], ret);
-			s--;
-		}
-	}
-	else if (a->zero > 0 || a->minus > 0)
-	{
-		if (d < 0)
-		{
-			ft_putchar ('-', ret);
-			d = d * -1;
-		}
-		while (d > 0)
-		{
-			str[s] = 48 + (d % 10);
-			d = d / 10;
-			s++;
-		}
-		while (s < 0)
-		{
-			ft_putchar (str[s], ret);
-			s--;
-		}
-		while (j > i)
-		{
-			ft_putchar('0', ret);
-			j--;
-		}
-	}
-	return (1);
 }
