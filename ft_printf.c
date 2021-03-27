@@ -33,11 +33,19 @@ int	ft_printf(const char *format, ...)
 	return (ret);
 }
 
- /* #include <stdio.h>
+ #include <stdio.h>
 
- int	main()
+ /*int	main()
 {
 	ft_printf(" 0*%0-*.*i*0 0*%0*.*i*0 ", 2, 6, 102, 21, 10, -101);
 	write(1, "\n", 1);
 	printf(" 0*%0-*.*i*0 0*%0*.*i*0 ", 2, 6, 102, 21, 10, -101);
 } */
+
+ /*int	main()
+{
+	ft_printf(" %-3.2i test%10.42i ", 10, -10);
+	write(1, "\n", 1);
+	printf(" %-3.2i test%10.42i ", 10, -10);
+} */
+

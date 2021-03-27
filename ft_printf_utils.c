@@ -54,7 +54,7 @@ void	ft_putchar(char c, int *ret)
 	(*ret)++;
 }
 
-int	ft_putnbr(int d, int *ret, s_flag *a)
+void	ft_putnbr(int d, int *ret, s_flag *a)
 {
 	long int	c;
 	
@@ -69,11 +69,10 @@ int	ft_putnbr(int d, int *ret, s_flag *a)
 		ft_putnbr(c / 10, ret, a);
 		ft_putnbr(c % 10, ret, a);
 	}
-	if (c <= 9)
+	else 
 	{
 		ft_putchar(c + '0', ret);
 	}
-	return (1);
 }
 
 void	ft_putstr(char *str, int *ret)

@@ -14,13 +14,13 @@ void	ft_printfD(va_list ap,  int *ret, s_flag *a)
 
 static void ft_fill(s_flag *a, int filler, int *ret)
 {
-	while (filler < a->width)
+	while (filler > 0)
 	{
 		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
 			ft_putchar('0', ret);
 		else
 			ft_putchar(' ', ret);
-		filler++;
+		filler--;
 	}
 }
 
@@ -29,16 +29,20 @@ int	ft_putdbl(int d, int *ret, s_flag *a)
 	int		len;
 	int		filler;
 
-	if (a->dot > -1)
+	filler = 0;
+	if (a->dot >= 0)
 		a->zero = 0;
 	len = ft_len(d);
-	filler = a->dot - len;
+	if (a->width > a->dot && len <= a->dot)
+		filler = a->width - a->dot;
+	if (a->width > len && a->dot < len)
+		filler = a->width - len;
 	if (a->minus == 0 && a->zero == 0)
 		ft_fill(a, filler, ret);
 	if (d < 0)
 	{
 		ft_putchar('-', ret);
-		d = d * -1;
+		d = -d;
 	}
 	while (len < a->dot)
 	{
@@ -48,7 +52,7 @@ int	ft_putdbl(int d, int *ret, s_flag *a)
 	if (!(d == 0 && a->dot >= 0))
 		ft_putnbr(d, ret, a);
 	if (a->minus > 0 || a->zero > 0)
-		ft_fill(a, len, ret);
+		ft_fill(a, filler, ret);
 	return (1);
 }
 
@@ -59,8 +63,7 @@ int		ft_len(int d)
 	len = 0;
 	if (d < 0)
 	{
-		d = d * -1;
-		len++;
+		d = -d;
 	}
 	while (d > 0)
 	{

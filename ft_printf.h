@@ -17,7 +17,7 @@ typedef struct	s_flag
 char			*ft_stdrup(const char *src);
 int				ft_printf(const char *fmt, ...);
 void			ft_putchar(char c, int *ret);
-int				ft_putnbr(int d, int *ret, s_flag *a);
+void			ft_putnbr(int d, int *ret, s_flag *a);
 void			ft_putstr(char *str, int *ret);
 int				ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i);
 int				ft_isdigit(char c);
