@@ -35,17 +35,27 @@ int	ft_printf(const char *format, ...)
 
  #include <stdio.h>
 
- /*int	main()
+/*int	main()
 {
-	ft_printf(" 0*%0-*.*i*0 0*%0*.*i*0 ", 2, 6, 102, 21, 10, -101);
-	write(1, "\n", 1);
-	printf(" 0*%0-*.*i*0 0*%0*.*i*0 ", 2, 6, 102, 21, 10, -101);
-} */
+	int i;
+	int	j;
 
- /*int	main()
+	i = ft_printf(" --0*%0*.0i*0 0*%0*.10i*0-- ", -21, 32767, 21, -32767);
+	write(1, "\n", 1);
+	j = printf(" --0*%0*.0i*0 0*%0*.10i*0-- ", -21, 32767, 21, -32767);
+	write(1, "\n", 1);
+	printf("%i", i);
+	write(1, "\n", 1);
+	printf("%i", j);
+}*/
+
+int	main()
 {
-	ft_printf(" %-3.2i test%10.42i ", 10, -10);
+	int i;
+	int j;
+	
+	i = ft_printf(" %-3.2u %10.42u ", 1, -1);
 	write(1, "\n", 1);
-	printf(" %-3.2i test%10.42i ", 10, -10);
-} */
-
+	j = printf(" %-3.2u %10.42u ", 1, -1);
+	printf("\n%i\n%i", i , j);
+}

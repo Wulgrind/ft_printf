@@ -1,50 +1,59 @@
 #include "ft_printf.h"
 
-static void	ft_putdbl(unsigned int u, int *ret, s_flag *a);
+static int	ft_putdbl(unsigned int u, int *ret, s_flag *a);
 static int	ft_len(unsigned int u);
-static void	ft_writedbl(unsigned int u, int *ret);
 
 void	ft_printfU(va_list ap, int *ret, s_flag *a)
 {
 	unsigned int	u;
 	
-	u = (unsigned int) va_arg(ap, unsigned int);
+	u = va_arg(ap, unsigned int);
+	if (u < 0)
+		u = -u;
 	ft_putdbl(u, ret, a);
 }
 
-static void	ft_putdbl(unsigned int u, int *ret, s_flag *a)
+static void	ft_fill(s_flag *a, long int filler, int *ret)
 {
-	int	i;
-	int	hole;
-
-	hole = 0;
-	i = ft_len(u);
-	if (a->dot < 0)
-		a->dot = 1;
-	while (i < a->dot)
-		hole++;
-	while (i + hole > a->width)
-		a->width++;
-	while (i + hole < a->width)
-		hole++;
-	if (a->minus == 0 && a->zero == 0)
+	while (filler > 0)
 	{
-		ft_writedbl(u, ret);
-		while (hole-- > 0)
+		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
+			ft_putchar('0', ret);
+		else
 			ft_putchar(' ', ret);
-	}
-	if (a->minus > 0 || a->zero > 0)
-	{
-		while (hole-- > 0)
-		{
-			if (a->minus > 0)
-				ft_putchar(' ', ret);
-			if (a->zero > 0)
-				ft_putchar('0', ret);
-		}
-		ft_writedbl(u, ret);
+		filler--;
 	}
 }
+
+static int	ft_putdbl(unsigned int u, int *ret, s_flag *a)
+{
+	long int	len;
+	long int	filler;
+
+	filler = 0;
+	if (a->dot > 0)
+		a-> zero = 0;
+	len = ft_len(u);
+	if (a->width > a->dot && len <= a->dot)
+		filler = a->width - a->dot;
+	if (a->width > len && a->dot < len)
+		filler = a->width - len;
+	if (u < 0)
+		filler--;
+	if (a->minus == 0)
+		ft_fill(a, filler, ret);
+	while (len < a->dot)
+	{
+		ft_putchar('0', ret);
+		len++;
+	}
+	if (!(u == 0 && a->dot >= 0))
+		ft_putnbr(u, ret, a);
+	if (a->minus > 0)
+		ft_fill(a, filler, ret);
+	return (1);
+}
+
 
 static int		ft_len(unsigned int u)
 {
@@ -57,18 +66,4 @@ static int		ft_len(unsigned int u)
 		len++;
 	}
 	return (len);
-}
-
-static void	ft_writedbl(unsigned int u, int *ret)
-{
-	long unsigned int nb;
-
-	nb = u;
-	while (nb > 9)
-	{
-		ft_writedbl(u / 10, ret);
-		ft_writedbl(u % 10, ret);
-	}
-	if (nb < 9)
-		ft_putchar(u + '0', ret);
 }
