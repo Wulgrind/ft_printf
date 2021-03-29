@@ -5,10 +5,11 @@ static int	ft_len(unsigned int u);
 
 void	ft_printfU(va_list ap, int *ret, s_flag *a)
 {
-	unsigned int	u;
+	long long i;
 	
-	u = va_arg(ap, unsigned int);
-	ft_putdbl(u, ret, a);
+	i = va_arg(ap, long long);
+	i = (unsigned int) i;
+	ft_putdbl(i, ret, a);
 }
 
 static void	ft_fill(s_flag *a, long int filler, int *ret)

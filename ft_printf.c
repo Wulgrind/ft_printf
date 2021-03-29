@@ -46,13 +46,13 @@ int	ft_printf(const char *format, ...)
 	printf("\n%i\n%j", i, j);
 }*/
 
-/*int	main()
+int	main()
 {
 	int i;
 	int j;
 	
-	i = ft_printf("%010.0i", 4294967295 );
+	i = ft_printf("%-3.2u %10.42u", 1, -1);
 	write(1, "\n", 1);
-	j = printf("%010.0i", 4294967295 );
+	j = printf("%-3.2u %10.42u", 1, -1);
 	printf("\n%i\n%i", i , j);
-}*/
+}
