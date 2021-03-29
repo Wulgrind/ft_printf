@@ -8,8 +8,6 @@ void	ft_printfU(va_list ap, int *ret, s_flag *a)
 	unsigned int	u;
 	
 	u = va_arg(ap, unsigned int);
-	if (u < 0)
-		u = -u;
 	ft_putdbl(u, ret, a);
 }
 

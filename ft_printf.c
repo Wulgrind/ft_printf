@@ -40,22 +40,19 @@ int	ft_printf(const char *format, ...)
 	int i;
 	int	j;
 
-	i = ft_printf(" --0*%0*.0i*0 0*%0*.10i*0-- ", -21, 32767, 21, -32767);
+	i = ft_printf(" %0-*i %0*i ", 21, 1021, 21, -1011);
 	write(1, "\n", 1);
-	j = printf(" --0*%0*.0i*0 0*%0*.10i*0-- ", -21, 32767, 21, -32767);
-	write(1, "\n", 1);
-	printf("%i", i);
-	write(1, "\n", 1);
-	printf("%i", j);
+	j = printf(" %0-*i %0*i ", 21, 1021, 21, -1011);
+	printf("\n%i\n%j", i, j);
 }*/
 
-int	main()
+/*int	main()
 {
 	int i;
 	int j;
 	
-	i = ft_printf(" %-3.2u %10.42u ", 1, -1);
+	i = ft_printf("%010.0i", 4294967295 );
 	write(1, "\n", 1);
-	j = printf(" %-3.2u %10.42u ", 1, -1);
+	j = printf("%010.0i", 4294967295 );
 	printf("\n%i\n%i", i , j);
-}
+}*/

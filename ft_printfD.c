@@ -29,7 +29,7 @@ int	ft_putdbl(long int d, int *ret, s_flag *a)
 	long int		filler;
 
 	filler = 0;
-	if (a->dot > 0)
+	if (a->dot >= 0)
 		a->zero = 0;
 	len = ft_len(d);
 	if (a->width > a->dot && len <= a->dot)
@@ -37,10 +37,11 @@ int	ft_putdbl(long int d, int *ret, s_flag *a)
 	if (a->width > len && a->dot < len)
 		filler = a->width - len;
 	if (d < 0)
-	{
 		filler--;
-		if (a->zero > 0)
-			ft_putchar('-', ret);
+	if (d < 0 && a->zero > 0)
+	{
+		ft_putchar('-', ret);
+		d = -d;
 	}
 	if (a->minus == 0)
 		ft_fill(a, filler, ret);
