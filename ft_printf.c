@@ -51,8 +51,8 @@ int	ft_printf(const char *format, ...)
 	int i;
 	int j;
 	
-	i = ft_printf("%-3.2u %10.42u", 1, -1);
+	i = ft_printf(" %-3.2x %10.42x ", 1, -1);
 	write(1, "\n", 1);
-	j = printf("%-3.2u %10.42u", 1, -1);
+	j = printf(" %-3.2x %10.42x ", 1, -1);
 	printf("\n%i\n%i", i , j);
 }*/

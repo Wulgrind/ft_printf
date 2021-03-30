@@ -10,6 +10,7 @@ void	ft_printfU(va_list ap, int *ret, s_flag *a)
 	u = (unsigned int)va_arg(ap, unsigned int);
 	ft_putdbl(u, ret, a);
 }
+
 void	ft_putnbru(unsigned int u, int *ret, s_flag *a)
 {
 	unsigned long long c;

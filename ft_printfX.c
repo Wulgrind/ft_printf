@@ -3,79 +3,75 @@
 static int		ft_len(unsigned int x)
 {
 	int				i;
-	unsigned int	j;
 
 	i = 0;
-	j = x;
-	while (j >= 16)
+	while (x > 0)
 	{
-		j = (j / 16);
+		x = x / 16;
 		i++;
 	}
 	return (i);
 }
 
-static int	ft_hexadecimal(unsigned int x,  int len, int c, int *ret)
+static void	ft_hexadecimal(unsigned int x, int *ret, s_flag *a, int c)
 {
-	int		temp;
-	char	*s;
-	int		i;
+	unsigned long long i;
 
-	i = 0;
-	if(!(s = malloc(sizeof(char) * (len + 1))))
-		return (0);
-	s[len + 1] = '\0';
-	while (len >= 0)
+	i = x;
+	if (i > 16)
 	{
-		temp = x % 16;
-		if (temp < 10)
-			s[len] = temp + 48;
-		if (temp >= 10 && c == 2)
-			s[len] = temp + 55;
-		if (temp >= 10 && c == 1)
-			s[len] = temp + 87;
-		x = (x / 16);
-		len--;
+		ft_hexadecimal(i / 16, ret, a, c);
+		ft_hexadecimal(i % 16, ret, a, c);
 	}
-	while (s[i])
+	else
 	{
-		ft_putchar(s[i], ret);
-		i++;
+		if (i < 10)
+			ft_putchar(i + 48, ret);
+		if (i >= 10 && c == 2)
+			ft_putchar(i + 55, ret);
+		if (i >= 10 && c == 1)
+			ft_putchar(i + 87, ret);
 	}
-	return (1);
 }
 
-int	ft_printfX(va_list ap, int *ret, s_flag *a, int c)
+void	ft_fill(s_flag *a, long int filler, int *ret)
 {
-	unsigned int	x;
-	int 			len;
-	int				hole;
-	
-	hole = 0;
-	x = (unsigned int) va_arg(ap, unsigned int);
-	len = ft_len(x);
-	while (a->width > (len + hole))
-		hole++;
-	while (a->dot > (len + hole))
-		hole++;
-	if (a->minus == 0 && a->zero == 0)
+	while (filler > 0)
 	{
-		while (hole > 0)
-		{
+		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
+			ft_putchar('0', ret);
+		else
 			ft_putchar(' ', ret);
-		}
+		filler--;
 	}
-	ft_hexadecimal(x,len, c, ret);
-	if (a->minus > 0 || a->zero > 0)
+}
+
+int		ft_printfX(va_list ap, int *ret, s_flag *a, int c)
+{
+	unsigned int		x;
+	long int 			len;
+	long int			filler;
+	
+	filler = 0;
+	x = (unsigned int) va_arg(ap, unsigned int);
+	x = (unsigned int)(4294967295 + 1 + x);
+	if (a->dot > 0)
+		a->zero = 0;
+	len = ft_len(x);
+	if (a->width > a->dot && len <= a->dot)
+		filler = a->width - a->dot;
+	if (a->width > len && a->dot < len)
+		filler = a->width - len;
+	if (a->minus == 0)
+		ft_fill(a, filler, ret);
+	while (len < a->dot)
 	{
-		while (hole > 0)
-		{
-			if (a->minus > 0)
-				ft_putchar(' ', ret);
-			if (a->minus == 0 && a->zero > 0)
-				ft_putchar('0', ret);
-			hole--;
-		}
+		ft_putchar('0', ret);
+		len++;
 	}
+	if (!(x == 0 && a->dot >= 0))
+		ft_hexadecimal(x, ret, a, c);
+	if (a->minus > 0)
+		ft_fill(a, filler, ret);
 	return (1);
 }
