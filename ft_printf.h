@@ -35,5 +35,6 @@ int				ft_printfX(va_list ap, int *ret, s_flag *a, int c);
 int				ft_check(char *str);
 int				ft_strlen(char *s);
 void			ft_putstrlen(char *str, int *ret, int len);
+void			ft_putnbru(unsigned int u, int *ret, s_flag *a);
 
 #endif

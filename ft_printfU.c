@@ -5,11 +5,23 @@ static int	ft_len(unsigned int u);
 
 void	ft_printfU(va_list ap, int *ret, s_flag *a)
 {
-	long long i;
-	
-	i = va_arg(ap, long long);
-	i = (unsigned int) i;
-	ft_putdbl(i, ret, a);
+	unsigned int u;
+
+	u = (unsigned int)va_arg(ap, unsigned int);
+	ft_putdbl(u, ret, a);
+}
+void	ft_putnbru(unsigned int u, int *ret, s_flag *a)
+{
+	unsigned long long c;
+
+	c = u;
+	if (c > 9)
+	{
+		ft_putnbr(c / 10, ret, a);
+		ft_putnbr(c % 10, ret, a);
+	}
+	else
+		ft_putchar(c + '0', ret);
 }
 
 static void	ft_fill(s_flag *a, long int filler, int *ret)
@@ -29,6 +41,8 @@ static int	ft_putdbl(unsigned int u, int *ret, s_flag *a)
 	long int	len;
 	long int	filler;
 
+	u = (unsigned int)(4294967295 + 1
+							+ u);
 	filler = 0;
 	if (a->dot > 0)
 		a-> zero = 0;
@@ -47,7 +61,7 @@ static int	ft_putdbl(unsigned int u, int *ret, s_flag *a)
 		len++;
 	}
 	if (!(u == 0 && a->dot >= 0))
-		ft_putnbr(u, ret, a);
+		ft_putnbru(u, ret, a);
 	if (a->minus > 0)
 		ft_fill(a, filler, ret);
 	return (1);
