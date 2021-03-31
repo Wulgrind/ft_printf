@@ -48,11 +48,11 @@ int	ft_printf(const char *format, ...)
 
 /*int	main()
 {
-	int i;
-	int j;
+	int i = 0;
+	int j = 0;
 	
-	i = ft_printf(" %-3.2x %10.42x ", 1, -1);
+	i = ft_printf(" %.*s ", -2, NULL);
 	write(1, "\n", 1);
-	j = printf(" %-3.2x %10.42x ", 1, -1);
+	j = printf(" %.*s ", -2, NULL);
 	printf("\n%i\n%i", i , j);
 }*/

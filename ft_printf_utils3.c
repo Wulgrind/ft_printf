@@ -14,18 +14,20 @@ int		ft_check(char *str)
 	return (0);
 }
 
-int		ft_dot(char *str, int *i, va_list ap, s_flag *a)
+int		ft_dot(char *str, int *i, va_list ap)
 {
 	int	j;
 
 	j = 0;
 	(*i)++;
-	if (!ft_isdigit(str[*i]))
+	if (!ft_isdigit(str[*i]) || str[*i] == '-')
 		j = ft_width(str, i);
 	else if (str[*i] == '*')
-		j = ft_nextarg(ap, a);
+		j = ft_nextdot(ap);
 	else 
 		(*i)--;
+	if (j < 0)
+		j = -1;
 	return (j);
 }
 

@@ -37,7 +37,7 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 			a->star = 1;
 		 }
 		 else if (str[*i] == '.')
-			a->dot = ft_dot(str, i, ap, a);
+			a->dot = ft_dot(str, i, ap);
 		 else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
 				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
 				|| str[*i] == '%')
