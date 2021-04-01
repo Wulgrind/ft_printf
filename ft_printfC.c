@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-void	ft_printfC(va_list ap, int *ret, s_flag *a)
+void	ft_printfC(va_list ap, s_flag *a)
 {
 	int	c;
 	int	len;
@@ -15,19 +15,19 @@ void	ft_printfC(va_list ap, int *ret, s_flag *a)
 	{
 		while (len < a->width && a->width != 1)
 		{
-			ft_putchar(' ', ret);
+			ft_putchar(' ', a);
 			len++;
 		}
 	}
-	ft_putchar(c, ret);
+	ft_putchar(c, a);
 	if (a->zero > 0 || a->minus > 0)
 	{
 		while (len < a->width)
 		{
 			if (a->minus > 0)
-				ft_putchar(' ', ret);
+				ft_putchar(' ', a);
 			if (a->zero > 0 && a->minus == 0)
-				ft_putchar('0', ret);
+				ft_putchar('0', a);
 			len++;
 		}
 	}

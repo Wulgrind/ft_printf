@@ -1,105 +1,80 @@
 #include "ft_printf.h"
 
-int		ft_l(unsigned long int x)
-{
-		int				i;
-		unsigned int	j;
-
-		i = 0;
-		j = x;
-		while (j > 16)
-		{
-			j /= 16;
-			i++;
-		}
-		return (i);
-}
-
-void	ft_hexadecimal(char **s, unsigned long int x, s_flag *a, int hole, int len)
-{
-	int	temp;
-
-	if (a->zero > 0 || a->minus > 0)
-	{
-		while (len-- > 0)
-		{
-			temp = x % 16;
-			if (temp < 10)
-				*s[hole + len + 2] = temp + 48;
-			if (temp >= 10)
-				*s[hole + len + 2] = temp + 55;
-			x /= 16;
-		}
-	}
-	if (a->zero == 0 || a->minus == 0)
-	{
-		while (len-- > 0)
-		{
-			temp = x % 16;
-			if (temp < 10)
-				*s[len + 2] = temp + 48;
-			if (temp >= 10)
-				*s[len + 2] = temp + 55;
-			x /= 16;
-		}
-	}
-}
-
-char	*ft_createstr(unsigned long int x, s_flag *a, char *s, int hole, int len)
+static int	ft_len(unsigned long long x)
 {
 	int	i;
 
 	i = 0;
-	if (a->zero > 0 || a->minus > 0)
+	if (x == 0)
+		i = 1;
+	while (x > 0)
 	{
-		if (a->minus > 0)
-			while (i < hole)
-				s[i++] = ' ';
-		else
-			while (i < hole)
-				s[i++] = '0';
-		s[i++] = '0';
-		s[i++] = 'X';
-		ft_hexadecimal(&s, x, a, hole, len);
+		x = x /16;
+		i++;
 	}
-	if (a->zero == 0 && a->minus == 0)
-	{
-		while (hole-- > 0)
-			s[len + hole] = ' ';
-		s[i++] = '0';
-		s[i++] = 'X';
-		ft_hexadecimal(&s, x, a, hole, len);
-	}
-	return (s);
+	return (i);
 }
 
-int	ft_printfP(va_list ap, int *ret, s_flag *a)
+static void	ft_hexadecimal(unsigned long long x, s_flag *a)
 {
-	unsigned long int	*p;
-	char				*s;
-	unsigned long int	i;
-	int					len;
-	int 				hole;
-	int					j;
+	unsigned long long i;
 
-	p = (unsigned long int *) va_arg(ap, void *);
-	i = *p;
-	j = 0;
-	len = ft_l(i);
-	if (a->dot > len)
-		hole = a->dot - len;
-	if (a->width > 0)
+	i = x;
+	if (i >= 16)
 	{
-		while (a->width < hole + len)
-		a->width++;
-		while ((hole + len) < a->width)
-			hole++;
+		ft_hexadecimal(i / 16, a);
+		ft_hexadecimal(i % 16, a);
 	}
-	if (!(s = malloc(sizeof(hole + len + 3))))
-		return (0);
-	s[hole + len + 3] = '\0';
-	s = ft_createstr(i, a, s, hole, len);
-	while (s[j++] != '\0')
-		ft_putchar(s[i], ret);
+	else
+	{
+		if (i < 10)
+			ft_putchar(i + 48, a);
+		if (i >= 10)
+			ft_putchar(i + 87, a);
+	}
+}
+
+static void ft_fill(s_flag *a, long int filler)
+{
+	while (filler > 0)
+	{
+		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
+			ft_putchar('0', a);
+		else
+			ft_putchar(' ', a);
+		filler--;
+	}
+}
+
+int	ft_printfP(va_list ap, s_flag *a)
+{
+	unsigned long long	x;
+	long int		len;
+	long int		filler;
+
+	filler = 0;
+	x = (unsigned long long) va_arg(ap, unsigned long long);
+	if (a->dot > 0)
+		a->zero = 0;
+	len = ft_len(x) + 2;
+	if (a->width > a->dot && len <= a->dot)
+		filler = a->width - a->dot;
+	if (a->width > len && a->dot < len)
+		filler = a->width - len;
+	if (a->minus == 0)
+		ft_fill(a, filler);
+	while (len < a->dot)
+	{
+		ft_putchar('0', a);
+		len++;
+	}
+	if(!(x == 0 && a->dot >= 0))
+	{
+		ft_putchar('0', a);
+		ft_putchar('x', a);
+		ft_hexadecimal(x, a);
+	}
+	if (a->minus > 0)
+		ft_fill (a, filler);
 	return (1);
 }

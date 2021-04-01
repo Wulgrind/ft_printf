@@ -21,7 +21,7 @@ char	*ft_stdrup(const char *src)
 	return (str);
 }
 
-int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
+int		ft_flags(va_list ap, char *str, s_flag *a, int *i)
 {
 	while (str[(*i)++])
 	{
@@ -42,7 +42,7 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
 				|| str[*i] == '%')
 		{
-			ft_type(ap, ret, str, a, i);
+			ft_type(ap, str, a, i);
 			return (1);
 		}
 		else
@@ -51,41 +51,41 @@ int		ft_flags(va_list ap, int *ret, char *str, s_flag *a, int *i)
 	return (1);
 }
 
-void	ft_putchar(char c, int *ret)
+void	ft_putchar(char c, s_flag *a)
 {
 	write (1, &c, 1);
-	(*ret)++;
+	(a->ret)++;
 }
 
-void	ft_putnbr(int d, int *ret, s_flag *a)
+void	ft_putnbr(int d, s_flag *a)
 {
 	long int	c;
 	
 	c = d;
 	if (c < 0)
 	{
-		ft_putchar('-', ret);
+		ft_putchar('-', a);
 		c = -c;
 	}
 	if (c > 9)
 	{
-		ft_putnbr(c / 10, ret, a);
-		ft_putnbr(c % 10, ret, a);
+		ft_putnbr(c / 10, a);
+		ft_putnbr(c % 10, a);
 	}
 	else 
 	{
-		ft_putchar(c + '0', ret);
+		ft_putchar(c + '0', a);
 	}
 }
 
-void	ft_putstr(char *str, int *ret)
+void	ft_putstr(char *str, s_flag *a)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		ft_putchar(str[i], ret);
+		ft_putchar(str[i], a);
 		i++;
 	}
 }

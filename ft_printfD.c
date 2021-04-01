@@ -1,29 +1,29 @@
 #include "ft_printf.h"
 
 int		ft_len(long int d);
-int		ft_putdbl(long int d, int *ret, s_flag *a);
+int		ft_putdbl(long int d, s_flag *a);
 
-void	ft_printfD(va_list ap,  int *ret, s_flag *a)
+void	ft_printfD(va_list ap, s_flag *a)
 {
 	long int	d;
 
 	d = (long int) va_arg(ap, int);
-	ft_putdbl(d, ret, a);
+	ft_putdbl(d, a);
 }
 
-static void ft_fill(s_flag *a, long int filler, int *ret)
+static void ft_fill(s_flag *a, long int filler)
 {
 	while (filler > 0)
 	{
 		if (a->zero > 0 && a->dot < 0 && a->minus == 0)
-			ft_putchar('0', ret);
+			ft_putchar('0', a);
 		else
-			ft_putchar(' ', ret);
+			ft_putchar(' ', a);
 		filler--;
 	}
 }
 
-int	ft_putdbl(long int d, int *ret, s_flag *a)
+int	ft_putdbl(long int d, s_flag *a)
 {
 	long int		len;
 	long int		filler;
@@ -40,26 +40,26 @@ int	ft_putdbl(long int d, int *ret, s_flag *a)
 		filler--;
 	if (d < 0 && a->zero > 0)
 	{
-		ft_putchar('-', ret);
+		ft_putchar('-', a);
 		d = -d;
 	}
 	if (a->minus == 0)
-		ft_fill(a, filler, ret);
+		ft_fill(a, filler);
 	if (d < 0)
 	{
 		if (a->zero == 0)
-			ft_putchar('-', ret);
+			ft_putchar('-', a);
 		d = -d;
 	}
 	while (len < a->dot)
 	{
-		ft_putchar('0', ret);
+		ft_putchar('0', a);
 		len++;
 	}
 	if (!(d == 0 && a->dot >= 0))
-		ft_putnbr(d, ret, a);
+		ft_putnbr(d, a);
 	if (a->minus > 0)
-		ft_fill(a, filler, ret);
+		ft_fill(a, filler);
 	return (1);
 }
 

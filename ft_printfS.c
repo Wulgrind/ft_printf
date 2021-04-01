@@ -10,22 +10,22 @@ static	int	ft_len(char	*str)
 	return (i);
 }
 
-static void	ft_treatminus(int *ret, s_flag *a, int len)
+static void	ft_treatminus(s_flag *a, int len)
 {
 	if (a->minus > 0 || a->zero > 0)
 	{
 		while (len < a->width)
 		{
 			if (a->minus > 0)
-				ft_putchar(' ', ret);
+				ft_putchar(' ', a);
 			if (a->zero > 0 && a->minus == 0)	
-				ft_putchar('0', ret);		
+				ft_putchar('0', a);		
 			len++;
 		}
 	}
 }
 
-void	ft_printfS(va_list ap, int *ret, s_flag *a)
+void	ft_printfS(va_list ap, s_flag *a)
 {
 	char	*str;
 	int		len;
@@ -43,15 +43,15 @@ void	ft_printfS(va_list ap, int *ret, s_flag *a)
 	if (a->minus == 0 && a->zero == 0)
 			while (len < a->width)
 			{
-				ft_putchar(' ', ret);
+				ft_putchar(' ', a);
 				len++;
 			}
 	if (a->dot >= 0)
 		while(len > a->dot)
 			len--;
 	if (a->dot <= -1)
-		ft_putstr(str, ret);
+		ft_putstr(str, a);
 	if (a->dot >= 0)
-		ft_putstrlen(str, ret, len);
-	ft_treatminus(ret, a, len);
+		ft_putstrlen(str, a, len);
+	ft_treatminus(a, len);
 }

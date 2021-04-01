@@ -11,6 +11,8 @@ int		ft_check(char *str)
 			return (1);
 		i++;
 	}
+	if (i > 0)
+		return (1);
 	return (0);
 }
 
@@ -31,30 +33,30 @@ int		ft_dot(char *str, int *i, va_list ap)
 	return (j);
 }
 
-void	ft_type(va_list ap, int *ret, char *str, s_flag *a, int *i)
+void	ft_type(va_list ap, char *str, s_flag *a, int *i)
 {
 	int	x;
 
 	if (str[*i] == 'c')
-		ft_printfC(ap, ret, a);
+		ft_printfC(ap, a);
 	if (str[*i] == 's')
-		ft_printfS(ap, ret, a);
+		ft_printfS(ap, a);
 	if (str[*i] == 'p')
-		ft_printfP(ap, ret, a);
+		ft_printfP(ap, a);
 	if (str[*i] == 'd' || str[*i] == 'i')
-		ft_printfD(ap, ret, a);
+		ft_printfD(ap, a);
 	if (str[*i] == 'u')
-		ft_printfU(ap, ret, a);
+		ft_printfU(ap, a);
 	if (str[*i] == 'x' || str[*i] == 'X')
 	{
 		if (str[*i] == 'x')
 			x = 1;
 		if (str[*i] == 'X')
 			x = 2;
-		ft_printfX(ap, ret, a, x);
+		ft_printfX(ap, a, x);
 	}
 	if (str[*i] == '%')
-		ft_putchar('%', ret);
+		ft_putchar('%', a);
 }
 
 int		ft_strlen(char *s)
@@ -67,14 +69,14 @@ int		ft_strlen(char *s)
 	return (i);
 }
 
-void	ft_putstrlen(char *str, int *ret, int len)
+void	ft_putstrlen(char *str, s_flag *a, int len)
 {
 	int	i;
 
 	i = 0;
-	while(str[i] && i < len)
+	while (str[i] && i < len)
 	{
-		ft_putchar(str[i], ret);
+		ft_putchar(str[i], a);
 		i++;
 	}
 }
