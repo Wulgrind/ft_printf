@@ -21,14 +21,17 @@ void	ft_printfC(va_list ap, s_flag *a)
 	}
 	ft_putchar(c, a);
 	if (a->zero > 0 || a->minus > 0)
+		ft_filler(a);
+}
+
+static void	ft_filler(s_flag *a)
+{
+	while (len < a->width)
 	{
-		while (len < a->width)
-		{
-			if (a->minus > 0)
-				ft_putchar(' ', a);
-			if (a->zero > 0 && a->minus == 0)
-				ft_putchar('0', a);
-			len++;
-		}
+		if (a->minus > 0)
+			ft_putchar(' ', a);
+		if (a->zero > 0 && a->minus == 0)
+			ft_putchar('0', a);
+		len++;
 	}
 }

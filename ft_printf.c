@@ -27,7 +27,7 @@ int	ft_printf(const char *format, ...)
 	return (ret);
 }
 
-void	ft_printf2(va_list ap,  int *i, char *str, s_flag *a)
+void	ft_printf2(va_list ap, int *i, char *str, s_flag *a)
 {
 	while (str[*i])
 	{
