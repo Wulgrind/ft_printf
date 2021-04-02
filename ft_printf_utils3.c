@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int		ft_check(char *str)
+int	ft_check(char *str)
 {
 	int	i;
 
@@ -16,7 +16,7 @@ int		ft_check(char *str)
 	return (0);
 }
 
-int		ft_dot(char *str, int *i, va_list ap)
+int	ft_dot(char *str, int *i, va_list ap)
 {
 	int	j;
 
@@ -26,7 +26,7 @@ int		ft_dot(char *str, int *i, va_list ap)
 		j = ft_width(str, i);
 	else if (str[*i] == '*')
 		j = ft_nextdot(ap);
-	else 
+	else
 		(*i)--;
 	if (j < 0)
 		j = -1;
@@ -59,7 +59,7 @@ void	ft_type(va_list ap, char *str, s_flag *a, int *i)
 		ft_putchar('%', a);
 }
 
-int		ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 

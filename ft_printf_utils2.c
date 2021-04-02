@@ -7,7 +7,7 @@ int	ft_len(unsigned int u)
 	len = 0;
 	while (u > 0)
 	{
-		u = u / 16;	
+		u = u / 16;
 		len++;
 	}
 	return (len);
@@ -20,7 +20,7 @@ int	ft_isdigit(char c)
 	return (1);
 }
 
-int ft_width(char *str, int *i)
+int	ft_width(char *str, int *i)
 {
 	int	j;
 	int	minus;
@@ -44,7 +44,7 @@ int ft_width(char *str, int *i)
 	return (j);
 }
 
-int ft_nextdot(va_list ap)
+int	ft_nextdot(va_list ap)
 {
 	int	i;
 
