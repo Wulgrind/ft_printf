@@ -1,18 +1,5 @@
 #include "ft_printf.h"
 
-static int		ft_len(unsigned int x)
-{
-	int				i;
-
-	i = 0;
-	while (x > 0)
-	{
-		x = x / 16;
-		i++;
-	}
-	return (i);
-}
-
 static void	ft_hexadecimal(unsigned int x, s_flag *a, int c)
 {
 	unsigned long long i;

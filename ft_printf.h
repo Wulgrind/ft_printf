@@ -15,6 +15,7 @@ typedef struct	s_flag
 	int		ret;
 }				s_flag;
 
+int				ft_len(unsigned int u);
 char			*ft_stdrup(const char *src);
 int				ft_printf(const char *fmt, ...);
 void			ft_putchar(char c, s_flag *a);
@@ -38,5 +39,7 @@ int				ft_strlen(char *s);
 void			ft_putstrlen(char *str, s_flag *a, int len);
 void			ft_putnbru(unsigned int u, s_flag *a);
 int				ft_nextdot(va_list ap);
+int				ft_lenP(unsigned long long x);
+int				ft_lenU(unsigned int u);
 
 #endif

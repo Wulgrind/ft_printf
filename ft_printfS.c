@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static	int	ft_len(char	*str)
+static	int	ft_lens(char	*str)
 {
 	int	i;
 	
@@ -34,7 +34,7 @@ void	ft_printfS(va_list ap, s_flag *a)
 	str = (char *) va_arg(ap, char *);
 	if (str == NULL)
 		str = "(null)";
-	len = ft_len(str);
+	len = ft_lens(str);
 	if (a->dot < -1)
 		a->dot = -1;
 	if (a->dot >= 0)

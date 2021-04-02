@@ -1,5 +1,18 @@
 #include "ft_printf.h"
 
+int	ft_len(unsigned int u)
+{
+	int	len;
+
+	len = 0;
+	while (u > 0)
+	{
+		u = u / 16;	
+		len++;
+	}
+	return (len);
+}
+
 int	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')

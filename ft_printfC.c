@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-#include <stdio.h>
+static void	ft_filler(s_flag *a, int len);
 
 void	ft_printfC(va_list ap, s_flag *a)
 {
@@ -21,10 +21,10 @@ void	ft_printfC(va_list ap, s_flag *a)
 	}
 	ft_putchar(c, a);
 	if (a->zero > 0 || a->minus > 0)
-		ft_filler(a);
+		ft_filler(a, len);
 }
 
-static void	ft_filler(s_flag *a)
+static void	ft_filler(s_flag *a, int len)
 {
 	while (len < a->width)
 	{

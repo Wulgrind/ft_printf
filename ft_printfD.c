@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 
-int		ft_len(long int d);
-int		ft_putdbl(long int d, s_flag *a);
+static int	ft_len2(long int d);
+int				ft_putdbl(long int d, s_flag *a);
 
 void	ft_printfD(va_list ap, s_flag *a)
 {
@@ -31,7 +31,7 @@ int	ft_putdbl(long int d, s_flag *a)
 	filler = 0;
 	if (a->dot >= 0)
 		a->zero = 0;
-	len = ft_len(d);
+	len = ft_len2(d);
 	if (a->width > a->dot && len <= a->dot)
 		filler = a->width - a->dot;
 	if (a->width > len && a->dot < len)
@@ -63,7 +63,7 @@ int	ft_putdbl(long int d, s_flag *a)
 	return (1);
 }
 
-int		ft_len(long int d)
+static int		ft_len2(long int d)
 {
 	long int	len;
 

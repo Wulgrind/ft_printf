@@ -1,23 +1,10 @@
 #include "ft_printf.h"
 
-static int	ft_len(unsigned long long x)
-{
-	int	i;
-
-	i = 0;
-	if (x == 0)
-		i = 1;
-	while (x > 0)
-	{
-		x = x /16;
-		i++;
-	}
-	return (i);
-}
+int	ft_printfP2(s_flag *a, long int filler, unsigned long long x, long int len);
 
 static void	ft_hexadecimal(unsigned long long x, s_flag *a)
 {
-	unsigned long long i;
+	unsigned long long	i;
 
 	i = x;
 	if (i >= 16)
@@ -34,7 +21,7 @@ static void	ft_hexadecimal(unsigned long long x, s_flag *a)
 	}
 }
 
-static void ft_fill(s_flag *a, long int filler)
+static void	ft_fill(s_flag *a, long int filler)
 {
 	while (filler > 0)
 	{
@@ -46,21 +33,42 @@ static void ft_fill(s_flag *a, long int filler)
 	}
 }
 
+int	ft_lenP(unsigned long long x)
+{
+	int	i;
+
+	i = 0;
+	if (x == 0)
+		i = 1;
+	while (x > 0)
+	{
+		x = x / 16;
+		i++;
+	}
+	return (i);
+}
+
 int	ft_printfP(va_list ap, s_flag *a)
 {
 	unsigned long long	x;
-	long int		len;
-	long int		filler;
+	long int			len;
+	long int			filler;
 
 	filler = 0;
 	x = (unsigned long long) va_arg(ap, unsigned long long);
 	if (a->dot > 0)
 		a->zero = 0;
-	len = ft_len(x) + 2;
+	len = ft_lenP(x) + 2;
 	if (a->width > a->dot && len <= a->dot)
 		filler = a->width - a->dot;
 	if (a->width > len && a->dot < len)
 		filler = a->width - len;
+	ft_printfP2(a, filler, x, len);
+	return (1);
+}
+
+int	ft_printfP2(s_flag *a, long int filler, unsigned long long x, long int len)
+{
 	if (a->minus == 0)
 		ft_fill(a, filler);
 	while (len < a->dot)
@@ -68,7 +76,7 @@ int	ft_printfP(va_list ap, s_flag *a)
 		ft_putchar('0', a);
 		len++;
 	}
-	if(!(x == 0 && a->dot >= 0))
+	if (!(x == 0 && a->dot >= 0))
 	{
 		ft_putchar('0', a);
 		ft_putchar('x', a);
