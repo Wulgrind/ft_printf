@@ -9,8 +9,9 @@ char	*ft_stdrup(const char *src)
 	len = 0;
 	while (src[len])
 		len++;
-	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
-	   return (NULL);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (!(str))
+		return (NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -21,26 +22,28 @@ char	*ft_stdrup(const char *src)
 	return (str);
 }
 
-int		ft_flags(va_list ap, char *str, t_flag *a, int *i)
+int	ft_flags(va_list ap, char *str, t_flag *a, int *i)
 {
 	while (str[(*i)++])
 	{
-		 if (str[*i] == '0')
+		if (str[*i] == '0')
 			a->zero = 1;
-		 else if (str[*i] == '-')
+		else if (str[*i] == '-')
 			a->minus = 1;
-		 else if (!ft_isdigit(str[*i]) && a->width == 0)
+		else if (!ft_isdigit(str[*i]) && a->width == 0)
 			a->width = ft_width(str, i);
-		 else if (str[*i] == '*')
-		 {
+		else if (str[*i] == '*')
+		{
 			a->width = ft_nextarg(ap, a);
 			a->star = 1;
-		 }
-		 else if (str[*i] == '.')
+		}
+		else if (str[*i] == '.')
 			a->dot = ft_dot(str, i, ap);
-		 else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p' || str[*i] == 'd'
-				|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x' || str[*i] == 'X'
-				|| str[*i] == '%')
+		else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p'
+			|| str[*i] == 'd'
+			|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x'
+			|| str[*i] == 'X'
+			|| str[*i] == '%')
 		{
 			ft_type(ap, str, a, i);
 			return (1);
@@ -60,7 +63,7 @@ void	ft_putchar(char c, t_flag *a)
 void	ft_putnbr(int d, t_flag *a)
 {
 	long int	c;
-	
+
 	c = d;
 	if (c < 0)
 	{
