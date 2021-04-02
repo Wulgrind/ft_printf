@@ -39,11 +39,8 @@ int	ft_flags(va_list ap, char *str, t_flag *a, int *i)
 		}
 		else if (str[*i] == '.')
 			a->dot = ft_dot(str, i, ap);
-		else if (str[*i] == 'c' || str[*i] == 's' || str[*i] == 'p'
-			|| str[*i] == 'd'
-			|| str[*i] == 'i' || str[*i] == 'u' || str[*i] == 'x'
-			|| str[*i] == 'X'
-			|| str[*i] == '%')
+		
+		else if (!(ft_checktype(str[*i])))
 		{
 			ft_type(ap, str, a, i);
 			return (1);

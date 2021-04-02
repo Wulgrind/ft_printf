@@ -15,6 +15,7 @@ typedef struct s_flag
 	int		ret;
 }				t_flag;
 
+int				ft_checktype(char i);
 int				ft_len(unsigned int u);
 char			*ft_stdrup(const char *src);
 int				ft_printf(const char *fmt, ...);
