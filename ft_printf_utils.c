@@ -39,7 +39,6 @@ int	ft_flags(va_list ap, char *str, t_flag *a, int *i)
 		}
 		else if (str[*i] == '.')
 			a->dot = ft_dot(str, i, ap);
-		
 		else if (!(ft_checktype(str[*i])))
 		{
 			ft_type(ap, str, a, i);
@@ -72,7 +71,7 @@ void	ft_putnbr(int d, t_flag *a)
 		ft_putnbr(c / 10, a);
 		ft_putnbr(c % 10, a);
 	}
-	else 
+	else
 	{
 		ft_putchar(c + '0', a);
 	}
