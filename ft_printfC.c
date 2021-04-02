@@ -1,7 +1,7 @@
 #include "ft_printf.h"
-static void	ft_filler(s_flag *a, int len);
+static void	ft_filler(t_flag *a, int len);
 
-void	ft_printfC(va_list ap, s_flag *a)
+void	ft_printfC(va_list ap, t_flag *a)
 {
 	int	c;
 	int	len;
@@ -24,7 +24,7 @@ void	ft_printfC(va_list ap, s_flag *a)
 		ft_filler(a, len);
 }
 
-static void	ft_filler(s_flag *a, int len)
+static void	ft_filler(t_flag *a, int len)
 {
 	while (len < a->width)
 	{

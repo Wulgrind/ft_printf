@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	ft_printf2(va_list ap, int *i, char *str, s_flag *a);
+void	ft_printf2(va_list ap, int *i, char *str, t_flag *a);
 
 int	ft_printf(const char *format, ...)
 {
@@ -8,7 +8,7 @@ int	ft_printf(const char *format, ...)
 	int			ret;
 	int			i;
 	char		*str;
-	s_flag		a;
+	t_flag		a;
 
 	ret = 0;
 	i = 0;
@@ -27,7 +27,7 @@ int	ft_printf(const char *format, ...)
 	return (ret);
 }
 
-void	ft_printf2(va_list ap, int *i, char *str, s_flag *a)
+void	ft_printf2(va_list ap, int *i, char *str, t_flag *a)
 {
 	while (str[*i])
 	{

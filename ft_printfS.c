@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static	int	ft_lens(char	*str)
+static	int	ft_lens(char *str)
 {
 	int	i;
 
@@ -10,7 +10,7 @@ static	int	ft_lens(char	*str)
 	return (i);
 }
 
-static void	ft_treatminus(s_flag *a, int len)
+static void	ft_treatminus(t_flag *a, int len)
 {
 	if (a->minus > 0 || a->zero > 0)
 	{
@@ -25,7 +25,7 @@ static void	ft_treatminus(s_flag *a, int len)
 	}
 }
 
-void	ft_printfS2(s_flag *a, int len, char *str)
+void	ft_printfS2(t_flag *a, int len, char *str)
 {
 	if (a->dot >= 0)
 		while (len > a->dot)
@@ -37,7 +37,7 @@ void	ft_printfS2(s_flag *a, int len, char *str)
 	ft_treatminus(a, len);
 }
 
-void	ft_printfS(va_list ap, s_flag *a)
+void	ft_printfS(va_list ap, t_flag *a)
 {
 	char	*str;
 	int		len;

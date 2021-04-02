@@ -52,7 +52,7 @@ int	ft_nextdot(va_list ap)
 	return (i);
 }
 
-int	ft_nextarg(va_list ap, s_flag *a)
+int	ft_nextarg(va_list ap, t_flag *a)
 {
 	int		i;
 

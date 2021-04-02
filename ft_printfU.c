@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-static int	ft_putdbl(unsigned int u, s_flag *a);
+static int	ft_putdbl(unsigned int u, t_flag *a);
 
-void	ft_printfU(va_list ap, s_flag *a)
+void	ft_printfU(va_list ap, t_flag *a)
 {
 	unsigned int	u;
 
@@ -10,7 +10,7 @@ void	ft_printfU(va_list ap, s_flag *a)
 	ft_putdbl(u, a);
 }
 
-void	ft_putnbru(unsigned int u, s_flag *a)
+void	ft_putnbru(unsigned int u, t_flag *a)
 {
 	unsigned long long	c;
 
@@ -24,7 +24,7 @@ void	ft_putnbru(unsigned int u, s_flag *a)
 		ft_putchar(c + '0', a);
 }
 
-static void	ft_fill(s_flag *a, long int filler)
+static void	ft_fill(t_flag *a, long int filler)
 {
 	while (filler > 0)
 	{
@@ -36,7 +36,7 @@ static void	ft_fill(s_flag *a, long int filler)
 	}
 }
 
-static int	ft_putdbl2(unsigned int u, s_flag *a, long int len, long int filler)
+static int	ft_putdbl2(unsigned int u, t_flag *a, long int len, long int filler)
 {
 	while (len < a->dot)
 	{
@@ -50,7 +50,7 @@ static int	ft_putdbl2(unsigned int u, s_flag *a, long int len, long int filler)
 	return (1);
 }
 
-static int	ft_putdbl(unsigned int u, s_flag *a)
+static int	ft_putdbl(unsigned int u, t_flag *a)
 {
 	long int	len;
 	long int	filler;

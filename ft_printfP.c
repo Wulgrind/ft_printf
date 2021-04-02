@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-int	ft_printfP2(s_flag *a, long int filler, unsigned long long x, long int len);
+int	ft_printfP2(t_flag *a, long int filler, unsigned long long x, long int len);
 
-static void	ft_hexadecimal(unsigned long long x, s_flag *a)
+static void	ft_hexadecimal(unsigned long long x, t_flag *a)
 {
 	unsigned long long	i;
 
@@ -21,7 +21,7 @@ static void	ft_hexadecimal(unsigned long long x, s_flag *a)
 	}
 }
 
-static void	ft_fill(s_flag *a, long int filler)
+static void	ft_fill(t_flag *a, long int filler)
 {
 	while (filler > 0)
 	{
@@ -48,7 +48,7 @@ int	ft_lenP(unsigned long long x)
 	return (i);
 }
 
-int	ft_printfP(va_list ap, s_flag *a)
+int	ft_printfP(va_list ap, t_flag *a)
 {
 	unsigned long long	x;
 	long int			len;
@@ -67,7 +67,7 @@ int	ft_printfP(va_list ap, s_flag *a)
 	return (1);
 }
 
-int	ft_printfP2(s_flag *a, long int filler, unsigned long long x, long int len)
+int	ft_printfP2(t_flag *a, long int filler, unsigned long long x, long int len)
 {
 	if (a->minus == 0)
 		ft_fill(a, filler);

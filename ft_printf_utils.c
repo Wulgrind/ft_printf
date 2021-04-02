@@ -21,7 +21,7 @@ char	*ft_stdrup(const char *src)
 	return (str);
 }
 
-int		ft_flags(va_list ap, char *str, s_flag *a, int *i)
+int		ft_flags(va_list ap, char *str, t_flag *a, int *i)
 {
 	while (str[(*i)++])
 	{
@@ -51,13 +51,13 @@ int		ft_flags(va_list ap, char *str, s_flag *a, int *i)
 	return (1);
 }
 
-void	ft_putchar(char c, s_flag *a)
+void	ft_putchar(char c, t_flag *a)
 {
 	write (1, &c, 1);
 	(a->ret)++;
 }
 
-void	ft_putnbr(int d, s_flag *a)
+void	ft_putnbr(int d, t_flag *a)
 {
 	long int	c;
 	
@@ -78,7 +78,7 @@ void	ft_putnbr(int d, s_flag *a)
 	}
 }
 
-void	ft_putstr(char *str, s_flag *a)
+void	ft_putstr(char *str, t_flag *a)
 {
 	int	i;
 

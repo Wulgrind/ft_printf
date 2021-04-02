@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static void	ft_hexadecimal(unsigned int x, s_flag *a, int c)
+static void	ft_hexadecimal(unsigned int x, t_flag *a, int c)
 {
 	unsigned long long	i;
 
@@ -21,7 +21,7 @@ static void	ft_hexadecimal(unsigned int x, s_flag *a, int c)
 	}
 }
 
-void	ft_fill(s_flag *a, long int filler)
+void	ft_fill(t_flag *a, long int filler)
 {
 	while (filler > 0)
 	{
@@ -33,7 +33,7 @@ void	ft_fill(s_flag *a, long int filler)
 	}
 }
 
-int	ft_printfX2(s_flag *a, long int filler, int c, unsigned int x)
+int	ft_printfX2(t_flag *a, long int filler, int c, unsigned int x)
 {
 	if (!(x == 0 && a->dot >= 0))
 		ft_hexadecimal(x, a, c);
@@ -42,7 +42,7 @@ int	ft_printfX2(s_flag *a, long int filler, int c, unsigned int x)
 	return (1);
 }
 
-int	ft_printfX(va_list ap, s_flag *a, int c)
+int	ft_printfX(va_list ap, t_flag *a, int c)
 {
 	unsigned int		x;
 	long int			len;

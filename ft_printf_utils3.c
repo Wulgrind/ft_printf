@@ -33,7 +33,7 @@ int	ft_dot(char *str, int *i, va_list ap)
 	return (j);
 }
 
-void	ft_type(va_list ap, char *str, s_flag *a, int *i)
+void	ft_type(va_list ap, char *str, t_flag *a, int *i)
 {
 	int	x;
 
@@ -69,7 +69,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-void	ft_putstrlen(char *str, s_flag *a, int len)
+void	ft_putstrlen(char *str, t_flag *a, int len)
 {
 	int	i;
 
