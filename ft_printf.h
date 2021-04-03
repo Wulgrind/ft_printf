@@ -16,11 +16,11 @@ typedef struct s_flag
 }				t_flag;
 
 int				ft_checktype(char i);
-int				ft_len(unsigned int u);
+int				ft_len(unsigned int u, t_flag *a);
 char			*ft_stdrup(const char *src);
 int				ft_printf(const char *fmt, ...);
 void			ft_putchar(char c, t_flag *a);
-void			ft_putnbr(int d, t_flag *a);
+void			ft_putnbr(long int d, t_flag *a);
 void			ft_putstr(char *str, t_flag *a);
 int				ft_flags(va_list ap, char *str, t_flag *a, int *i);
 int				ft_isdigit(char c);
@@ -41,6 +41,6 @@ void			ft_putstrlen(char *str, t_flag *a, int len);
 void			ft_putnbru(unsigned int u, t_flag *a);
 int				ft_nextdot(va_list ap);
 int				ft_lenP(unsigned long long x);
-int				ft_lenU(unsigned int u);
+int				ft_lenU(unsigned int u, t_flag *a);
 
 #endif

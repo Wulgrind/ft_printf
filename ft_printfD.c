@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int	ft_len2(long int d);
+static int	ft_len2(long int d, t_flag *a);
 int			ft_putdbl(long int d, t_flag *a);
 int			ft_putdbl2(long int d, t_flag *a, long int filler, long int len);
 
@@ -32,7 +32,7 @@ int	ft_putdbl(long int d, t_flag *a)
 	filler = 0;
 	if (a->dot >= 0)
 		a->zero = 0;
-	len = ft_len2(d);
+	len = ft_len2(d, a);
 	if (a->width > a->dot && len <= a->dot)
 		filler = a->width - a->dot;
 	if (a->width > len && a->dot < len)
@@ -63,18 +63,20 @@ int	ft_putdbl2(long int d, t_flag *a, long int filler, long int len)
 		ft_putchar('0', a);
 		len++;
 	}
-	if (!(d == 0 && a->dot >= 0))
+	if (!(d == 0 && a->dot == 0))
 		ft_putnbr(d, a);
 	if (a->minus > 0)
 		ft_fill(a, filler);
 	return (1);
 }
 
-static int	ft_len2(long int d)
+static int	ft_len2(long int d, t_flag *a)
 {
 	long int	len;
 
 	len = 0;
+	if (d == 0 && a->dot != 0)
+		len++;
 	if (d < 0)
 	{
 		d = -d;

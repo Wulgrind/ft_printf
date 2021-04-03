@@ -35,7 +35,7 @@ void	ft_fill(t_flag *a, long int filler)
 
 int	ft_printfX2(t_flag *a, long int filler, int c, unsigned int x)
 {
-	if (!(x == 0 && a->dot >= 0))
+	if (!(x == 0 && a->dot == 0))
 		ft_hexadecimal(x, a, c);
 	if (a->minus > 0)
 		ft_fill(a, filler);
@@ -53,7 +53,7 @@ int	ft_printfX(va_list ap, t_flag *a, int c)
 	x = (unsigned int)(4294967295 + 1 + x);
 	if (a->dot > 0)
 		a->zero = 0;
-	len = ft_len(x);
+	len = ft_len(x, a);
 	if (a->width > a->dot && len <= a->dot)
 		filler = a->width - a->dot;
 	if (a->width > len && a->dot < len)
@@ -65,6 +65,6 @@ int	ft_printfX(va_list ap, t_flag *a, int c)
 		ft_putchar('0', a);
 		len++;
 	}
-	ft_printfX2(a, filler, c, x);
+		ft_printfX2(a, filler, c, x);
 	return (1);
 }

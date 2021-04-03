@@ -56,7 +56,7 @@ void	ft_putchar(char c, t_flag *a)
 	(a->ret)++;
 }
 
-void	ft_putnbr(int d, t_flag *a)
+void	ft_putnbr(long int d, t_flag *a)
 {
 	long int	c;
 

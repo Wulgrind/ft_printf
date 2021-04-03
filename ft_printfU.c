@@ -43,7 +43,7 @@ static int	ft_putdbl2(unsigned int u, t_flag *a, long int len, long int filler)
 		ft_putchar('0', a);
 		len++;
 	}
-	if (!(u == 0 && a->dot >= 0))
+	if (!(u == 0 && a->dot == 0))
 		ft_putnbru(u, a);
 	if (a->minus > 0)
 		ft_fill(a, filler);
@@ -59,7 +59,7 @@ static int	ft_putdbl(unsigned int u, t_flag *a)
 	filler = 0;
 	if (a->dot > 0)
 		a-> zero = 0;
-	len = ft_lenU(u);
+	len = ft_lenU(u, a);
 	if (a->width > a->dot && len <= a->dot)
 		filler = a->width - a->dot;
 	if (a->width > len && a->dot < len)
