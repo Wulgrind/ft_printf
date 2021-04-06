@@ -65,6 +65,6 @@ int	ft_printfX(va_list ap, t_flag *a, int c)
 		ft_putchar('0', a);
 		len++;
 	}
-		ft_printfX2(a, filler, c, x);
+	ft_printfX2(a, filler, c, x);
 	return (1);
 }

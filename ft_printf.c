@@ -41,15 +41,3 @@ void	ft_printf2(va_list ap, int *i, char *str, t_flag *a)
 		(*i)++;
 	}
 }
-
-#include <stdio.h>
-/*
-int	main()
-{
-	int i = 0;
-	int j = 0;
-	i = ft_printf("%-.2x", 0);
-	printf("\n");
-	j = printf("%-.2x", 0);
-	printf("\n%i\n%i", i, j);
-}*/
